@@ -1,0 +1,12 @@
+D:\ProgramasVisualStudio\Proyectos\nerframework\InventarioConMVC\GestorInventario\Modelo\bin\Debug\Modelo.dll
+D:\ProgramasVisualStudio\Proyectos\nerframework\InventarioConMVC\GestorInventario\Modelo\bin\Debug\Modelo.pdb
+D:\ProgramasVisualStudio\Proyectos\nerframework\InventarioConMVC\GestorInventario\Modelo\obj\Debug\Modelo.csproj.AssemblyReference.cache
+D:\ProgramasVisualStudio\Proyectos\nerframework\InventarioConMVC\GestorInventario\Modelo\obj\Debug\Modelo.csproj.CoreCompileInputs.cache
+D:\ProgramasVisualStudio\Proyectos\nerframework\InventarioConMVC\GestorInventario\Modelo\obj\Debug\Modelo.dll
+D:\ProgramasVisualStudio\Proyectos\nerframework\InventarioConMVC\GestorInventario\Modelo\obj\Debug\Modelo.pdb
+C:\Users\ivana\Desktop\InventarioConMVC\GestorInventario\Modelo\bin\Debug\Modelo.dll
+C:\Users\ivana\Desktop\InventarioConMVC\GestorInventario\Modelo\bin\Debug\Modelo.pdb
+C:\Users\ivana\Desktop\InventarioConMVC\GestorInventario\Modelo\obj\Debug\Modelo.csproj.AssemblyReference.cache
+C:\Users\ivana\Desktop\InventarioConMVC\GestorInventario\Modelo\obj\Debug\Modelo.csproj.CoreCompileInputs.cache
+C:\Users\ivana\Desktop\InventarioConMVC\GestorInventario\Modelo\obj\Debug\Modelo.dll
+C:\Users\ivana\Desktop\InventarioConMVC\GestorInventario\Modelo\obj\Debug\Modelo.pdb
