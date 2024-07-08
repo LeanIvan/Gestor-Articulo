@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Controlador;
+﻿using Controlador;
 using Modelo;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Vista
 {
@@ -25,11 +19,11 @@ namespace Vista
             InitializeComponent();
 
             timer = new System.Windows.Forms.Timer();
-            timer.Interval = 500; 
+            timer.Interval = 500;
             timer.Tick += Timer_Tick;
 
             controller = new ProductoController();
-      
+
 
             btnAceptar.MouseEnter += new EventHandler(btn_MouseEnter);
             btnAceptar.MouseLeave += new EventHandler(btn_MouseLeave);
@@ -38,9 +32,9 @@ namespace Vista
             btnAceptar.Click += new EventHandler(btnAceptar_Click);
             btnCancelar.Click += new EventHandler(btnCancelar_Click);
 
-              
 
         }
+
 
         private void AddForm_Load(object sender, EventArgs e)
         {
@@ -50,18 +44,20 @@ namespace Vista
             /// comboBoxes
             comboBoxMarca.DisplayMember = "Descripcion";
             comboBoxMarca.ValueMember = "Id";
+
             comboBoxMarca.DataSource = listaMarcas;
 
             comboBoxCategoria.DisplayMember = "Descripcion";
             comboBoxCategoria.ValueMember = "Id";
+
             comboBoxCategoria.DataSource = listaCategorias;
+
 
 
             if (comboBoxMarca.Items.Count > 0)
             {
                 comboBoxMarca.SelectedIndex = 0;
             }
-
 
             if (comboBoxCategoria.Items.Count > 0)
             {
@@ -71,6 +67,7 @@ namespace Vista
 
             /// TextBoxes
             /// 
+
 
 
         }
@@ -84,12 +81,15 @@ namespace Vista
             {
                 if (ValidarDatos(out string mensajeError))
                 {
+
+
                     string codigo = txtBoxCodigo.Text;
                     string nombre = txtNombre.Text;
                     string descripcion = txtBoxDescripcion.Text;
                     string urlImagen = string.Empty;
                     int idMarca = (int)comboBoxMarca.SelectedValue;
                     int idCategoria = (int)comboBoxCategoria.SelectedValue;
+
 
 
                     if (!decimal.TryParse(txtPrecio.Text, out decimal precio) || precio <= 0)
@@ -99,16 +99,26 @@ namespace Vista
                     }
 
                     // Si está validado, añadir a la db
-                 ///   controller.InsertarArticulo(new Articulo(codigo, nombre, precio, idMarca, idCategoria, descripcion, urlImagen));
+                    int rowsAfectadas = controller.InsertarArticulo(new Articulo(codigo, nombre, precio, idMarca, idCategoria, descripcion, urlImagen));
 
-                    MessageBox.Show("Artículo añadido con éxito.");
-                    this.DialogResult = DialogResult.OK;
+                    if (rowsAfectadas > 0)
+                    {
+                        MessageBox.Show("Artículo añadido con éxito.");
+                        this.DialogResult = DialogResult.OK;
+
+                    }
+                    else
+                    {
+
+                        throw new Exception("no se pudo agregar");
+                    }
                 }
+
                 else
                 {
-                    // Mostrar mensaje de error y activar el Timer y el sonido de error
+                    // Mostrar mensaje de error y activar el Timer y el sonido de error .{ revisar en casos especiales
                     ReproducirSonidoError();
-                    MessageBox.Show(mensajeError);                 
+                    MessageBox.Show(mensajeError);
                     timer.Start();
                     this.DialogResult = DialogResult.None; // No cerrar el formulario
                 }
@@ -166,10 +176,11 @@ namespace Vista
                 }
             }
 
+
             // Detener el Timer después de dos parpadeos
             if (contadorParpadeo >= 4)
             {
-                timer.Stop();           
+                timer.Stop();
                 contadorParpadeo = 0;
 
                 txtBoxCodigo.BackColor = SystemColors.Window;
@@ -183,8 +194,6 @@ namespace Vista
         {
             System.Media.SystemSounds.Beep.Play();
         }
-
-
 
 
 
@@ -209,12 +218,14 @@ namespace Vista
                 valido = false;
             }
 
+            /*
             if (string.IsNullOrWhiteSpace(txtBoxDescripcion.Text))
             {
                 mensajeError += "\nLa descripción no puede estar vacía.";
                 txtBoxDescripcion.BackColor = Color.Red;
                 valido = false;
             }
+            */
 
             if (!decimal.TryParse(txtPrecio.Text, out decimal precio) || precio <= 0)
             {
@@ -227,6 +238,6 @@ namespace Vista
         }
 
     }
-    
+
 }
 

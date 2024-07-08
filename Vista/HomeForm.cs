@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlTypes;
-using System.Drawing;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Controlador;
+﻿using Controlador;
 using Modelo;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Vista
 {
@@ -19,8 +11,8 @@ namespace Vista
     {
 
         public ProductoController controller = new ProductoController();
-          
-        
+
+
         public HomeForm()
         {
             InitializeComponent();
@@ -29,22 +21,22 @@ namespace Vista
             /// home form
             /// 
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false; 
+            this.MaximizeBox = false;
 
 
             /// dgvLists
             /// 
-            dgvList.BackgroundColor = Color.FromArgb(26, 32, 40); 
-            dgvList.DefaultCellStyle.BackColor = Color.FromArgb(26, 32, 40); 
-            dgvList.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(26, 32, 40); 
-            dgvList.DefaultCellStyle.ForeColor = Color.White; 
+            dgvList.BackgroundColor = Color.FromArgb(26, 32, 40);
+            dgvList.DefaultCellStyle.BackColor = Color.FromArgb(26, 32, 40);
+            dgvList.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(26, 32, 40);
+            dgvList.DefaultCellStyle.ForeColor = Color.White;
             dgvList.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgvList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
 
             /// comboBoxes
             comboBoxBusqueda.Items.Clear();
-            
+
             comboBoxBusqueda.Items.Add("Buscar por Código");
             comboBoxBusqueda.Items.Add("Buscar por Nombre");
             comboBoxBusqueda.Items.Add("Buscar por Marca");
@@ -59,35 +51,35 @@ namespace Vista
 
             /// btns
             /// 
-            btnEditar.Click += new EventHandler (editar_Producto_btn);
-            
-          
+            btnEditar.Click += new EventHandler(editar_Producto_btn);
 
-          
+
+
+
 
             /// txtBox
             /// 
 
-          
+
 
         }
 
-      
+
 
         private void Homeform_Load(object sender, EventArgs e)
         {
 
             /// dgvList
-             List<Articulo> listArticulos = controller.ListarArticulos();
+            List<Articulo> listArticulos = controller.ListarArticulos();
             dgvList.DataSource = listArticulos;
             dgvList.ReadOnly = false;
             dgvList.Columns["IdMarca"].HeaderText = "ID Marca";
-        //    dgvList.Columns["IdMarca"].Visible = false;
-        //    dgvList.Columns["idCategoria"].Visible = false;
+            //    dgvList.Columns["IdMarca"].Visible = false;
+            //    dgvList.Columns["idCategoria"].Visible = false;
             dgvList.Columns["idCategoria"].HeaderText = "ID Categoria";
             dgvList.Columns["UrlImagen"].Visible = false;
             dgvList.Columns["Descripcion"].Visible = false;
-            PictureBoxArticulo.Load(listArticulos[0].UrlImagen);
+          ///  PictureBoxArticulo.Load(listArticulos[0].UrlImagen);
 
 
         }
@@ -98,36 +90,36 @@ namespace Vista
         private void ActualizarSeccionProductos(object sender, EventArgs e)
         {
             DataGridViewRow fila = dgvList.CurrentRow;
-            if(fila != null)
+            if (fila != null)
             {
                 /// la url está en el indice 6
-               
-              PictureBoxArticulo.ImageLocation = (string)fila.Cells[6].Value;
-              PictureBoxArticulo.Refresh();
+
+                PictureBoxArticulo.ImageLocation = (string)fila.Cells[6].Value;
+                PictureBoxArticulo.Refresh();
 
                 string PrecioArt = "$ " + fila.Cells[2].Value.ToString();
                 string DescripcionArt = fila.Cells[5].Value.ToString();
 
                 /// traer desde la db
 
-                string MarcaArt =  controller.getMarcaById((int)fila.Cells[3].Value);                                                     
+                string MarcaArt = controller.getMarcaById((int)fila.Cells[3].Value);
                 string CategoriaArt = controller.getCategoriaById((int)fila.Cells[4].Value);
 
 
                 /// update de labels en la seccion
                 /// 
-              
-              
-               
+
+
+
                 lblMarca.Text = MarcaArt;
                 lblCategoria.Text = CategoriaArt;
                 lblPrecio.Text = PrecioArt;
                 lblDescripcion.Text = DescripcionArt;
 
-                
+
 
             }
-     
+
         }
 
 
@@ -135,18 +127,18 @@ namespace Vista
 
         private void btnNuevoProducto_Click(object sender, EventArgs e)
         {
-            AddForm addfrm = new AddForm();        
+            AddForm addfrm = new AddForm();
             addfrm.ShowDialog();
-    
+
         }
 
 
-       
+
 
 
         private void EditarProducto(DataGridViewRow selectedRow)
         {
-            
+
             Articulo selectedArticulo = new Articulo
             {
                 Codigo = selectedRow.Cells["Codigo"].Value.ToString(),
@@ -161,8 +153,6 @@ namespace Vista
 
 
 
-
- 
             EditForm editForm = new EditForm(selectedArticulo);
 
             editForm.ShowDialog();
@@ -186,7 +176,7 @@ namespace Vista
                 {
                     EditarProducto(selectedRow);
                 }
-                
+
             }
         }
 
@@ -197,9 +187,9 @@ namespace Vista
             Button button = sender as Button;
             if (button != null)
             {
-              
-                button.BackColor = Color.Red; 
-              //  button.ForeColor = Color.White;   
+
+                button.BackColor = Color.Red;
+                //  button.ForeColor = Color.White;   
             }
         }
 
@@ -210,7 +200,7 @@ namespace Vista
             {
 
                 button.BackColor = Color.Orange;
-                
+
             }
         }
 

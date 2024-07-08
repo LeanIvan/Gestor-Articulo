@@ -1,32 +1,26 @@
-﻿using System;
+﻿using Modelo;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
-using System.Threading.Tasks;
-using Modelo;
 
 
 namespace Controlador
 {
     public class ProductoController
     {
-        public ConexionDB db = new ConexionDB();
+        public ConexionDB db;
 
-        public List<Articulo> ListarArticulos()
+        public ProductoController()
         {
-            return db.GetListaDeArticulos();
-        }
-
-        public List<Marca> ListarMarcas() {
-            return db.GetListaDeMarcas();
+            db = new ConexionDB();
 
         }
+
+
+
 
         public List<Categoria> ListarCategorias()
         {
-
             List<Categoria> listaCategoria = new List<Categoria>();
 
             string query = "select Id , Descripcion from CATEGORIAS";
@@ -34,15 +28,12 @@ namespace Controlador
             try
             {
                 db.Abrir();
+                db.EjecutarQuery(query);
+                SqlDataReader reader = db.Command.ExecuteReader();
 
-                db.command = db.EjecutarQuery(query);
-                db.reader = db.command.ExecuteReader();
-
-                while (db.reader.Read())
+                while (reader.Read())
                 {
-                    Categoria cat = new Categoria((int)db.reader["Id"], db.reader["Descripcion"] as string);
-
-
+                    Categoria cat = new Categoria((int)reader["Id"], reader["Descripcion"] as string);
 
                     listaCategoria.Add(cat);
                 }
@@ -60,6 +51,9 @@ namespace Controlador
         }
 
 
+
+
+
         public string getMarcaById(int id)
         {
 
@@ -67,26 +61,28 @@ namespace Controlador
 
             try
             {
+
                 db.Abrir();
+                db.EjecutarQuery($"select Descripcion from MARCAS M where M.Id ={id}");
+                SqlDataReader reader = db.Command.ExecuteReader();
 
-                db.command = db.EjecutarQuery($"select Descripcion from MARCAS M where M.Id ={id}");
-                db.reader = db.command.ExecuteReader();
-
-                while (db.reader.Read())
+                while (reader.Read())
                 {
-                    marca = db.reader["Descripcion"].ToString();
+                    marca = reader["Descripcion"].ToString();
                 }
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.ToString());
             }
-            finally
-            {
-                db.Cerrar();
-            }
+            finally { db.Cerrar(); }
+
             return marca;
         }
+
+
+
+
 
         public string getCategoriaById(int id)
         {
@@ -95,59 +91,126 @@ namespace Controlador
             try
             {
                 db.Abrir();
+                db.EjecutarQuery($"select Descripcion from CATEGORIAS C where C.Id = {id}");
+                SqlDataReader reader = db.Command.ExecuteReader();
 
-                db.command = db.EjecutarQuery($"select Descripcion from CATEGORIAS C where C.Id = {id}");
-                db.reader = db.command.ExecuteReader();
-
-                while (db.reader.Read())
+                while (reader.Read())
                 {
-                    cat = db.reader["Descripcion"].ToString();
+                    cat = reader["Descripcion"].ToString();
                 }
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.ToString());
-            }
-            finally
-            {
-                db.Cerrar();
+            }finally { db.Cerrar(); }
 
-            }
             return cat;
         }
 
-        public void InsertarArticulo(Articulo articulo)
+
+
+
+        public List<Marca> ListarMarcas()
         {
-            string query = "INSERT INTO Articulos (Codigo, Nombre, Descripcion, Precio, IdMarca, IdCategoria, ImagenUrl) " +
-                           "VALUES (@Codigo, @Nombre, @Descripcion, @Precio, @IdMarca, @IdCategoria, @ImagenUrl)";
+            string query = "SELECT Id, Descripcion FROM Marcas";
+
+            List<Marca> marcas = new List<Marca>();
 
             try
             {
                 db.Abrir();
-                db.command.Parameters.Clear();
-
-
-                // Asignar parámetros
-                db.command.Parameters.AddWithValue("@Codigo", articulo.Codigo);
-                db.command.Parameters.AddWithValue("@Nombre", articulo.Nombre);
-                db.command.Parameters.AddWithValue("@Descripcion", articulo.Descripcion);
-                db.command.Parameters.AddWithValue("@Precio", articulo.Precio);
-                db.command.Parameters.AddWithValue("@IdMarca", articulo.IdMarca);
-                db.command.Parameters.AddWithValue("@IdCategoria", articulo.IdCategoria);
-                db.command.Parameters.AddWithValue("@ImagenUrl", articulo.UrlImagen);
-
                 db.EjecutarQuery(query);
-    
+                SqlDataReader reader = db.Command.ExecuteReader();
+
+
+                while (reader.Read())
+                {
+                    Marca marca = new Marca((int)reader["Id"], (string)reader["Descripcion"]);
+                    marcas.Add(marca);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("error al devolver lista de marcas", ex);
+
+            }
+            finally { db.Cerrar(); }
+            return marcas;
+        }
+
+
+
+
+        public List<Articulo> ListarArticulos()
+        {
+
+            string query = "SELECT A.Codigo,A.Nombre,A.Descripcion,A.Precio,A.IdMarca,A.IdCategoria,A.ImagenUrl FROM ARTICULOS A";
+
+            List<Articulo> articulos = new List<Articulo>();
+            try
+            {
+                db.Abrir();
+                db.EjecutarQuery(query);
+                SqlDataReader reader = db.Command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Articulo articulo = new Articulo(
+                        (string)reader["Codigo"],
+                        (string)reader["Nombre"],
+                        (decimal)reader["Precio"],
+                        (int)reader["IdMarca"],
+                        (int)reader["IdCategoria"],
+                        (string)reader["Descripcion"],
+                        (string)reader["ImagenUrl"]
+                    );
+
+                    articulos.Add(articulo);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error fetching list of Articulitos: " + ex.Message, ex);
+            }
+            finally { db.Cerrar(); }
+
+            return articulos;
+        }
+
+
+
+
+
+        public int InsertarArticulo(Articulo articulo)
+        {
+
+            string query = $"insert into ARTICULOS(Codigo , Nombre , Descripcion, IdMarca, IdCategoria, ImagenUrl, Precio)" +
+                $"values (@Codigo ,@Nombre,@Descripcion,@IdMarca,@IdCategoria,@ImagenUrl,@Precio)";
+
+            int filasAfectadas;
+
+            try
+            {
+                db.Abrir();
+
+                db.setQuery(query);
+                db.AgregarParametros("@Codigo", articulo.Codigo);
+                db.AgregarParametros("@Nombre", articulo.Nombre);
+                db.AgregarParametros("@Descripcion", articulo.Descripcion);
+                db.AgregarParametros("@IdMarca", articulo.IdMarca);
+                db.AgregarParametros("@IdCategoria", articulo.IdCategoria);
+                db.AgregarParametros("@ImagenUrl", articulo.UrlImagen);
+                db.AgregarParametros("@Precio", articulo.Precio);
+                filasAfectadas = db.EjecutarAccion();
+
             }
             catch (Exception e)
             {
 
                 throw new Exception(e.ToString());
 
-            }finally   
-            {
-                db.Cerrar();
-            }      
+            }finally { db.Cerrar(); }
+            return filasAfectadas;
         }
 
 
