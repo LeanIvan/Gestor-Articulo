@@ -110,6 +110,7 @@ namespace Controlador
 
 
 
+
         public List<Marca> ListarMarcas()
         {
             string query = "SELECT Id, Descripcion FROM Marcas";
@@ -137,6 +138,7 @@ namespace Controlador
             finally { db.Cerrar(); }
             return marcas;
         }
+
 
 
 

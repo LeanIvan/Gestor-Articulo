@@ -56,7 +56,6 @@ namespace Vista
 
 
 
-
             /// txtBox
             /// 
 
@@ -72,17 +71,18 @@ namespace Vista
             /// dgvList
             List<Articulo> listArticulos = controller.ListarArticulos();
             dgvList.DataSource = listArticulos;
-            dgvList.ReadOnly = false;
+            dgvList.ReadOnly = true;
             dgvList.Columns["IdMarca"].HeaderText = "ID Marca";
             //    dgvList.Columns["IdMarca"].Visible = false;
             //    dgvList.Columns["idCategoria"].Visible = false;
             dgvList.Columns["idCategoria"].HeaderText = "ID Categoria";
             dgvList.Columns["UrlImagen"].Visible = false;
             dgvList.Columns["Descripcion"].Visible = false;
-          ///  PictureBoxArticulo.Load(listArticulos[0].UrlImagen);
+            ///  PictureBoxArticulo.Load(listArticulos[0].UrlImagen);
 
 
         }
+
 
 
         // evento que cambia la img del articulo
@@ -93,9 +93,20 @@ namespace Vista
             if (fila != null)
             {
                 /// la url está en el indice 6
+                ///      
 
-                PictureBoxArticulo.ImageLocation = (string)fila.Cells[6].Value;
-                PictureBoxArticulo.Refresh();
+                try
+                {
+
+                    PictureBoxArticulo.Load((string)fila.Cells[6].Value);
+                
+
+                }catch (Exception ex)
+                {
+
+                    PictureBoxArticulo.Load("https://previews.123rf.com/images/koblizeek/koblizeek2208/koblizeek220800254/190563481-sin-s%C3%ADmbolo-de-vector-de-imagen-falta-el-icono-disponible-no-hay-galer%C3%ADa-para-este-marcador-de.jpg");
+               
+                }
 
                 string PrecioArt = "$ " + fila.Cells[2].Value.ToString();
                 string DescripcionArt = fila.Cells[5].Value.ToString();
@@ -109,19 +120,14 @@ namespace Vista
                 /// update de labels en la seccion
                 /// 
 
-
-
                 lblMarca.Text = MarcaArt;
                 lblCategoria.Text = CategoriaArt;
                 lblPrecio.Text = PrecioArt;
                 lblDescripcion.Text = DescripcionArt;
 
-
-
             }
 
         }
-
 
 
 
@@ -131,9 +137,6 @@ namespace Vista
             addfrm.ShowDialog();
 
         }
-
-
-
 
 
         private void EditarProducto(DataGridViewRow selectedRow)
@@ -149,8 +152,6 @@ namespace Vista
                 Descripcion = selectedRow.Cells["Descripcion"].Value.ToString(),
                 UrlImagen = selectedRow.Cells["UrlImagen"].Value.ToString()
             };
-
-
 
 
             EditForm editForm = new EditForm(selectedArticulo);
@@ -188,7 +189,7 @@ namespace Vista
             if (button != null)
             {
 
-                button.BackColor = Color.Red;
+                button.BackColor = Color.FromArgb(241, 90, 37);
                 //  button.ForeColor = Color.White;   
             }
         }
@@ -199,42 +200,13 @@ namespace Vista
             if (button != null)
             {
 
-                button.BackColor = Color.Orange;
+                button.BackColor = Color.FromArgb(255, 163, 0);
 
             }
         }
 
-
-
     }
 
-
-
-
-
-
-    /*
-private void btnEnviar_Click(object sender, EventArgs e)
-{
-
-
-string nombre = txtBoxNombre.Text;
-decimal precio = decimal.Parse(txtBoxPrecio.Text);
-int stock = (int)nmrcStock.Value;
-
-controller.AgregarProducto(nombre, precio, stock, comboBoxMarca.SelectedItem as Marca);
-Actualizar();
-
-}
-
-private void Actualizar()
-{
-
-dgvList.DataSource = controller.ListarProductos();
-dgvList.Refresh();
-
-}
-*/
 
 }
 
