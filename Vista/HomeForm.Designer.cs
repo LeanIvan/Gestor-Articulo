@@ -33,6 +33,7 @@ namespace Vista
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HomeForm));
             this.dgvList = new System.Windows.Forms.DataGridView();
             this.PanelInfo = new System.Windows.Forms.Panel();
+            this.panelLineMid = new System.Windows.Forms.Panel();
             this.panelLineLeft = new System.Windows.Forms.Panel();
             this.lblDescripcion = new System.Windows.Forms.Label();
             this.lblCategoria = new System.Windows.Forms.Label();
@@ -80,6 +81,7 @@ namespace Vista
             // PanelInfo
             // 
             this.PanelInfo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(34)))), ((int)(((byte)(43)))));
+            this.PanelInfo.Controls.Add(this.panelLineMid);
             this.PanelInfo.Controls.Add(this.panelLineLeft);
             this.PanelInfo.Controls.Add(this.lblDescripcion);
             this.PanelInfo.Controls.Add(this.lblCategoria);
@@ -97,6 +99,16 @@ namespace Vista
             this.PanelInfo.Size = new System.Drawing.Size(325, 484);
             this.PanelInfo.TabIndex = 6;
             // 
+            // panelLineMid
+            // 
+            this.panelLineMid.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(163)))), ((int)(((byte)(0)))));
+            this.panelLineMid.Enabled = false;
+            this.panelLineMid.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(163)))), ((int)(((byte)(0)))));
+            this.panelLineMid.Location = new System.Drawing.Point(35, 276);
+            this.panelLineMid.Name = "panelLineMid";
+            this.panelLineMid.Size = new System.Drawing.Size(265, 1);
+            this.panelLineMid.TabIndex = 28;
+            // 
             // panelLineLeft
             // 
             this.panelLineLeft.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(163)))), ((int)(((byte)(0)))));
@@ -109,11 +121,10 @@ namespace Vista
             // 
             // lblDescripcion
             // 
-            this.lblDescripcion.AutoSize = true;
             this.lblDescripcion.ForeColor = System.Drawing.Color.White;
-            this.lblDescripcion.Location = new System.Drawing.Point(149, 386);
+            this.lblDescripcion.Location = new System.Drawing.Point(132, 376);
             this.lblDescripcion.Name = "lblDescripcion";
-            this.lblDescripcion.Size = new System.Drawing.Size(35, 13);
+            this.lblDescripcion.Size = new System.Drawing.Size(190, 62);
             this.lblDescripcion.TabIndex = 26;
             this.lblDescripcion.Text = "label1";
             // 
@@ -121,7 +132,7 @@ namespace Vista
             // 
             this.lblCategoria.AutoSize = true;
             this.lblCategoria.ForeColor = System.Drawing.Color.White;
-            this.lblCategoria.Location = new System.Drawing.Point(149, 356);
+            this.lblCategoria.Location = new System.Drawing.Point(132, 346);
             this.lblCategoria.Name = "lblCategoria";
             this.lblCategoria.Size = new System.Drawing.Size(35, 13);
             this.lblCategoria.TabIndex = 25;
@@ -131,7 +142,7 @@ namespace Vista
             // 
             this.lblMarca.AutoSize = true;
             this.lblMarca.ForeColor = System.Drawing.Color.White;
-            this.lblMarca.Location = new System.Drawing.Point(149, 327);
+            this.lblMarca.Location = new System.Drawing.Point(132, 317);
             this.lblMarca.Name = "lblMarca";
             this.lblMarca.Size = new System.Drawing.Size(35, 13);
             this.lblMarca.TabIndex = 24;
@@ -141,7 +152,7 @@ namespace Vista
             // 
             this.lblPrecio.AutoSize = true;
             this.lblPrecio.ForeColor = System.Drawing.Color.White;
-            this.lblPrecio.Location = new System.Drawing.Point(149, 299);
+            this.lblPrecio.Location = new System.Drawing.Point(132, 289);
             this.lblPrecio.Name = "lblPrecio";
             this.lblPrecio.Size = new System.Drawing.Size(35, 13);
             this.lblPrecio.TabIndex = 23;
@@ -164,7 +175,7 @@ namespace Vista
             // 
             this.lblEstaticoDescripcion.AutoSize = true;
             this.lblEstaticoDescripcion.ForeColor = System.Drawing.Color.White;
-            this.lblEstaticoDescripcion.Location = new System.Drawing.Point(31, 386);
+            this.lblEstaticoDescripcion.Location = new System.Drawing.Point(32, 375);
             this.lblEstaticoDescripcion.Name = "lblEstaticoDescripcion";
             this.lblEstaticoDescripcion.Size = new System.Drawing.Size(69, 13);
             this.lblEstaticoDescripcion.TabIndex = 20;
@@ -190,7 +201,7 @@ namespace Vista
             // 
             this.lblEstaticoCategoria.AutoSize = true;
             this.lblEstaticoCategoria.ForeColor = System.Drawing.Color.White;
-            this.lblEstaticoCategoria.Location = new System.Drawing.Point(32, 356);
+            this.lblEstaticoCategoria.Location = new System.Drawing.Point(32, 346);
             this.lblEstaticoCategoria.Name = "lblEstaticoCategoria";
             this.lblEstaticoCategoria.Size = new System.Drawing.Size(60, 13);
             this.lblEstaticoCategoria.TabIndex = 19;
@@ -216,7 +227,7 @@ namespace Vista
             // 
             this.lblEstaticoMarca.AutoSize = true;
             this.lblEstaticoMarca.ForeColor = System.Drawing.Color.White;
-            this.lblEstaticoMarca.Location = new System.Drawing.Point(32, 327);
+            this.lblEstaticoMarca.Location = new System.Drawing.Point(32, 317);
             this.lblEstaticoMarca.Name = "lblEstaticoMarca";
             this.lblEstaticoMarca.Size = new System.Drawing.Size(63, 13);
             this.lblEstaticoMarca.TabIndex = 18;
@@ -226,7 +237,7 @@ namespace Vista
             // 
             this.lblEstaticoPrecio.AutoSize = true;
             this.lblEstaticoPrecio.ForeColor = System.Drawing.Color.White;
-            this.lblEstaticoPrecio.Location = new System.Drawing.Point(32, 299);
+            this.lblEstaticoPrecio.Location = new System.Drawing.Point(32, 289);
             this.lblEstaticoPrecio.Name = "lblEstaticoPrecio";
             this.lblEstaticoPrecio.Size = new System.Drawing.Size(43, 13);
             this.lblEstaticoPrecio.TabIndex = 17;
@@ -248,9 +259,9 @@ namespace Vista
             this.btnBuscar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(163)))), ((int)(((byte)(0)))));
             this.btnBuscar.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBuscar.Location = new System.Drawing.Point(569, 38);
+            this.btnBuscar.Location = new System.Drawing.Point(550, 38);
             this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(119, 23);
+            this.btnBuscar.Size = new System.Drawing.Size(138, 23);
             this.btnBuscar.TabIndex = 16;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = false;
@@ -280,7 +291,7 @@ namespace Vista
             this.richTextBoxBuscar.Multiline = false;
             this.richTextBoxBuscar.Name = "richTextBoxBuscar";
             this.richTextBoxBuscar.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.richTextBoxBuscar.Size = new System.Drawing.Size(259, 21);
+            this.richTextBoxBuscar.Size = new System.Drawing.Size(240, 21);
             this.richTextBoxBuscar.TabIndex = 18;
             this.richTextBoxBuscar.Text = "";
             this.richTextBoxBuscar.WordWrap = false;
@@ -332,6 +343,7 @@ namespace Vista
         private Button btnBuscar;
         private Button btnNuevoProducto;
         private RichTextBox richTextBoxBuscar;
+        private Panel panelLineMid;
     }
 }
 

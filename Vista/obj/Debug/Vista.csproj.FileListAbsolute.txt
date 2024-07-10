@@ -30,3 +30,4 @@ C:\Users\ivana\Desktop\InventarioConMVC\GestorInventario\Vista\obj\Debug\Vista.e
 C:\Users\ivana\Desktop\InventarioConMVC\GestorInventario\Vista\obj\Debug\Vista.pdb
 C:\Users\ivana\Desktop\InventarioConMVC\GestorInventario\Vista\obj\Debug\Vista.EditForm.resources
 C:\Users\ivana\Desktop\InventarioConMVC\GestorInventario\Vista\obj\Debug\Vista.AddForm.resources
+C:\Users\ivana\Desktop\InventarioConMVC\GestorInventario\Vista\obj\Debug\Vista.CheckImgForm.resources

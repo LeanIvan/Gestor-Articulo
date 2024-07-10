@@ -31,6 +31,9 @@ namespace Vista
             btnCancelar.MouseLeave += new EventHandler(btn_MouseLeave);
             btnAceptar.Click += new EventHandler(btnAceptar_Click);
             btnCancelar.Click += new EventHandler(btnCancelar_Click);
+            
+
+            // btnCheckImage.Click += new EventHandler();
 
 
         }
@@ -229,7 +232,7 @@ namespace Vista
 
             if (!decimal.TryParse(txtPrecio.Text, out decimal precio) || precio <= 0)
             {
-                mensajeError += "\nIngrese un precio válido mayor a 0.";
+                mensajeError += "\nIngrese un precio válido o mayor a 0.";
                 txtPrecio.BackColor = Color.Red;
                 valido = false;
             }
@@ -237,6 +240,14 @@ namespace Vista
             return valido;
         }
 
+        private void btnCheckImage_Click(object sender, EventArgs e)
+        {
+
+          CheckImgForm formImg = new CheckImgForm(this.textBoxUrlImage.Text);
+
+            formImg.ShowDialog();
+
+        }
     }
 
 }

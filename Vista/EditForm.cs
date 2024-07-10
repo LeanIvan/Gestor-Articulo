@@ -2,6 +2,8 @@
 using Modelo;
 using System;
 using System.Drawing;
+using System.Drawing.Text;
+using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 
 namespace Vista
@@ -25,6 +27,7 @@ namespace Vista
                 btnCancelar.MouseLeave += new EventHandler(btn_MouseLeave);
                 btnAceptar.Click += new EventHandler(btnAceptar_Click);
                 btnCancelar.Click += new EventHandler(btnCancelar_Click);
+                btnCheckImage.Click += new EventHandler(Click_VerImg);
 
                 /// txtBox
 
@@ -32,6 +35,7 @@ namespace Vista
                 this.txtNombre.Text = art.Nombre;
                 this.txtPrecio.Text = art.Precio.ToString();
                 this.textDescripcion.Text = art.Descripcion;
+                this.textBoxUrl.Text = art.UrlImagen;
 
                 /// comboBoxs
                 /// 
@@ -42,6 +46,13 @@ namespace Vista
 
 
             }
+
+             void Click_VerImg(Object sender, EventArgs e)
+            {
+                CheckImgForm frm = new CheckImgForm(this.textBoxUrl.Text);
+                frm.ShowDialog();
+            }
+
 
             void btnAceptar_Click(object sender, EventArgs e)
             {
