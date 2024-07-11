@@ -34,6 +34,7 @@ namespace Vista
                 this.txtPrecio.Text = art.Precio.ToString();
                 this.textDescripcion.Text = art.Descripcion;
                 this.textBoxUrl.Text = art.UrlImagen;
+                this.textBoxId.Text = art.Id.ToString();
                 
                 /// comboBoxs
                 /// 
@@ -71,11 +72,13 @@ namespace Vista
                 this.Close();
             }
 
+
             void btn_MouseEnter(object sender, EventArgs e)
             {
                 Button btn = sender as Button;
                 if (btn != null)
                 {
+                   
                     btn.BackColor = Color.Gray;
                 }
             }
@@ -91,6 +94,7 @@ namespace Vista
 
 
         }
+
 
 
 
@@ -114,6 +118,7 @@ namespace Vista
 
                 Articulo art = new Articulo
                 {
+                    Id = int.Parse(this.textBoxId.Text),
                     Codigo = this.txtCodigo.Text,
                     Nombre = this.txtNombre.Text,
                     Precio = precio,

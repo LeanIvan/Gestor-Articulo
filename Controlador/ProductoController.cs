@@ -146,7 +146,7 @@ namespace Controlador
         public List<Articulo> ListarArticulos()
         {
 
-            string query = "SELECT A.Codigo,A.Nombre,A.Descripcion,A.Precio,A.IdMarca,A.IdCategoria,A.ImagenUrl FROM ARTICULOS A";
+            string query = "SELECT A.Id, A.Codigo,A.Nombre,A.Descripcion,A.Precio,A.IdMarca,A.IdCategoria,A.ImagenUrl FROM ARTICULOS A";
 
             List<Articulo> articulos = new List<Articulo>();
             try
@@ -158,6 +158,7 @@ namespace Controlador
                 while (reader.Read())
                 {
                     Articulo articulo = new Articulo(
+                        (int)reader["Id"],
                         (string)reader["Codigo"],
                         (string)reader["Nombre"],
                         (decimal)reader["Precio"],
@@ -218,10 +219,10 @@ namespace Controlador
 
 
 
-        public int EliminarArticulo(string Codigo)
+        public int EliminarArticulo(int Id)
         {
 
-            string query = $"DELETE FROM ARTICULOS WHERE Codigo = @Codigo";
+            string query = $"DELETE FROM ARTICULOS WHERE Id = @Id";
 
             int filasAfectadas;
 
@@ -230,7 +231,7 @@ namespace Controlador
                 db.Abrir();
 
                 db.setQuery(query);
-                db.AgregarParametros("@Codigo",Codigo);
+                db.AgregarParametros("@Id",Id);
                
                 filasAfectadas = db.EjecutarAccion();
             }
@@ -255,11 +256,12 @@ namespace Controlador
                 db.Abrir();
 
                 string query = "UPDATE ARTICULOS " +
-                               "SET Precio = @Precio, Nombre = @Nombre, Descripcion = @Descripcion, IdMarca = @IdMarca, IdCategoria = @IdCategoria, ImagenUrl = @ImagenUrl " +
-                               "WHERE Codigo = @Codigo";
+                               "SET Precio = @Precio, Nombre = @Nombre, Descripcion = @Descripcion, IdMarca = @IdMarca, IdCategoria = @IdCategoria, ImagenUrl = @ImagenUrl, Codigo = @Codigo " +
+                               "WHERE Id = @Id";
 
 
                 db.setQuery(query);
+                db.AgregarParametros("@Id",articulo.Id);
                 db.AgregarParametros("@Precio", articulo.Precio);
                 db.AgregarParametros("@Nombre", articulo.Nombre);
                 db.AgregarParametros("@Descripcion", articulo.Descripcion);

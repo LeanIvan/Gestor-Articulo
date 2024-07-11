@@ -48,6 +48,8 @@ namespace Vista
             this.lblUrlImage = new System.Windows.Forms.Label();
             this.textBoxUrl = new System.Windows.Forms.TextBox();
             this.btnCheckImage = new System.Windows.Forms.Button();
+            this.lblId = new System.Windows.Forms.Label();
+            this.textBoxId = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // txtCodigo
@@ -56,7 +58,7 @@ namespace Vista
             this.txtCodigo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtCodigo.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtCodigo.ForeColor = System.Drawing.Color.Black;
-            this.txtCodigo.Location = new System.Drawing.Point(106, 30);
+            this.txtCodigo.Location = new System.Drawing.Point(106, 47);
             this.txtCodigo.MaxLength = 50;
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.ReadOnly = true;
@@ -69,7 +71,7 @@ namespace Vista
             this.txtNombre.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtNombre.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtNombre.ForeColor = System.Drawing.Color.Black;
-            this.txtNombre.Location = new System.Drawing.Point(106, 70);
+            this.txtNombre.Location = new System.Drawing.Point(106, 87);
             this.txtNombre.MaxLength = 50;
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(183, 25);
@@ -81,7 +83,7 @@ namespace Vista
             this.txtPrecio.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtPrecio.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtPrecio.ForeColor = System.Drawing.Color.Black;
-            this.txtPrecio.Location = new System.Drawing.Point(106, 110);
+            this.txtPrecio.Location = new System.Drawing.Point(106, 125);
             this.txtPrecio.Name = "txtPrecio";
             this.txtPrecio.Size = new System.Drawing.Size(183, 25);
             this.txtPrecio.TabIndex = 2;
@@ -94,7 +96,7 @@ namespace Vista
             this.comboBoxMarca.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.comboBoxMarca.ForeColor = System.Drawing.Color.Black;
             this.comboBoxMarca.FormattingEnabled = true;
-            this.comboBoxMarca.Location = new System.Drawing.Point(106, 190);
+            this.comboBoxMarca.Location = new System.Drawing.Point(106, 201);
             this.comboBoxMarca.Name = "comboBoxMarca";
             this.comboBoxMarca.Size = new System.Drawing.Size(183, 25);
             this.comboBoxMarca.TabIndex = 4;
@@ -133,7 +135,7 @@ namespace Vista
             this.lblCodigo.BackColor = System.Drawing.Color.Transparent;
             this.lblCodigo.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblCodigo.ForeColor = System.Drawing.Color.Black;
-            this.lblCodigo.Location = new System.Drawing.Point(12, 32);
+            this.lblCodigo.Location = new System.Drawing.Point(12, 50);
             this.lblCodigo.Name = "lblCodigo";
             this.lblCodigo.Size = new System.Drawing.Size(53, 19);
             this.lblCodigo.TabIndex = 7;
@@ -145,7 +147,7 @@ namespace Vista
             this.lblNombre.BackColor = System.Drawing.Color.Transparent;
             this.lblNombre.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblNombre.ForeColor = System.Drawing.Color.Black;
-            this.lblNombre.Location = new System.Drawing.Point(12, 72);
+            this.lblNombre.Location = new System.Drawing.Point(12, 91);
             this.lblNombre.Name = "lblNombre";
             this.lblNombre.Size = new System.Drawing.Size(59, 19);
             this.lblNombre.TabIndex = 8;
@@ -157,7 +159,7 @@ namespace Vista
             this.lblPrecio.BackColor = System.Drawing.Color.Transparent;
             this.lblPrecio.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblPrecio.ForeColor = System.Drawing.Color.Black;
-            this.lblPrecio.Location = new System.Drawing.Point(12, 112);
+            this.lblPrecio.Location = new System.Drawing.Point(12, 128);
             this.lblPrecio.Name = "lblPrecio";
             this.lblPrecio.Size = new System.Drawing.Size(46, 19);
             this.lblPrecio.TabIndex = 9;
@@ -181,7 +183,7 @@ namespace Vista
             this.lblMarca.BackColor = System.Drawing.Color.Transparent;
             this.lblMarca.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblMarca.ForeColor = System.Drawing.Color.Black;
-            this.lblMarca.Location = new System.Drawing.Point(12, 193);
+            this.lblMarca.Location = new System.Drawing.Point(12, 205);
             this.lblMarca.Name = "lblMarca";
             this.lblMarca.Size = new System.Drawing.Size(47, 19);
             this.lblMarca.TabIndex = 11;
@@ -195,7 +197,7 @@ namespace Vista
             this.comboBoxCategoria.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.comboBoxCategoria.ForeColor = System.Drawing.Color.Black;
             this.comboBoxCategoria.FormattingEnabled = true;
-            this.comboBoxCategoria.Location = new System.Drawing.Point(106, 150);
+            this.comboBoxCategoria.Location = new System.Drawing.Point(106, 164);
             this.comboBoxCategoria.Name = "comboBoxCategoria";
             this.comboBoxCategoria.Size = new System.Drawing.Size(183, 25);
             this.comboBoxCategoria.TabIndex = 3;
@@ -206,7 +208,7 @@ namespace Vista
             this.lblCategoria.BackColor = System.Drawing.Color.Transparent;
             this.lblCategoria.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblCategoria.ForeColor = System.Drawing.Color.Black;
-            this.lblCategoria.Location = new System.Drawing.Point(12, 153);
+            this.lblCategoria.Location = new System.Drawing.Point(12, 167);
             this.lblCategoria.Name = "lblCategoria";
             this.lblCategoria.Size = new System.Drawing.Size(68, 19);
             this.lblCategoria.TabIndex = 13;
@@ -214,7 +216,7 @@ namespace Vista
             // 
             // textDescripcion
             // 
-            this.textDescripcion.Location = new System.Drawing.Point(106, 296);
+            this.textDescripcion.Location = new System.Drawing.Point(106, 297);
             this.textDescripcion.MaxLength = 150;
             this.textDescripcion.Multiline = true;
             this.textDescripcion.Name = "textDescripcion";
@@ -225,7 +227,7 @@ namespace Vista
             // 
             this.lblUrlImage.AutoSize = true;
             this.lblUrlImage.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblUrlImage.Location = new System.Drawing.Point(13, 236);
+            this.lblUrlImage.Location = new System.Drawing.Point(13, 240);
             this.lblUrlImage.Name = "lblUrlImage";
             this.lblUrlImage.Size = new System.Drawing.Size(83, 19);
             this.lblUrlImage.TabIndex = 15;
@@ -236,7 +238,7 @@ namespace Vista
             this.textBoxUrl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxUrl.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.textBoxUrl.ForeColor = System.Drawing.Color.Black;
-            this.textBoxUrl.Location = new System.Drawing.Point(106, 234);
+            this.textBoxUrl.Location = new System.Drawing.Point(106, 236);
             this.textBoxUrl.MaxLength = 1000;
             this.textBoxUrl.Name = "textBoxUrl";
             this.textBoxUrl.Size = new System.Drawing.Size(183, 25);
@@ -252,10 +254,37 @@ namespace Vista
             this.btnCheckImage.Text = "Ver Imagen";
             this.btnCheckImage.UseVisualStyleBackColor = true;
             // 
+            // lblId
+            // 
+            this.lblId.AutoSize = true;
+            this.lblId.BackColor = System.Drawing.Color.Transparent;
+            this.lblId.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lblId.ForeColor = System.Drawing.Color.Black;
+            this.lblId.Location = new System.Drawing.Point(12, 11);
+            this.lblId.Name = "lblId";
+            this.lblId.Size = new System.Drawing.Size(23, 19);
+            this.lblId.TabIndex = 16;
+            this.lblId.Text = "ID";
+            // 
+            // textBoxId
+            // 
+            this.textBoxId.BackColor = System.Drawing.Color.White;
+            this.textBoxId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxId.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.textBoxId.ForeColor = System.Drawing.Color.Black;
+            this.textBoxId.Location = new System.Drawing.Point(106, 9);
+            this.textBoxId.MaxLength = 50;
+            this.textBoxId.Name = "textBoxId";
+            this.textBoxId.ReadOnly = true;
+            this.textBoxId.Size = new System.Drawing.Size(183, 25);
+            this.textBoxId.TabIndex = 17;
+            // 
             // EditForm
             // 
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(306, 403);
+            this.Controls.Add(this.textBoxId);
+            this.Controls.Add(this.lblId);
             this.Controls.Add(this.btnCheckImage);
             this.Controls.Add(this.textBoxUrl);
             this.Controls.Add(this.lblUrlImage);
@@ -274,6 +303,7 @@ namespace Vista
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.txtCodigo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "EditForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Editar Producto";
@@ -288,6 +318,8 @@ namespace Vista
         private Label lblUrlImage;
         private TextBox textBoxUrl;
         private Button btnCheckImage;
+        private Label lblId;
+        private TextBox textBoxId;
     }
 
 }

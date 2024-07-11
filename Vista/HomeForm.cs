@@ -3,8 +3,6 @@ using Modelo;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
-using System.Linq.Expressions;
 using System.Windows.Forms;
 
 namespace Vista
@@ -14,13 +12,14 @@ namespace Vista
 
 
         public ProductoController controller = new ProductoController();
-        string ruta = AppDomain.CurrentDomain.BaseDirectory;
 
+        List<Articulo> articulos;
 
 
         public HomeForm()
         {
             InitializeComponent();
+
 
 
             /// home form
@@ -39,13 +38,14 @@ namespace Vista
             dgvList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
 
+
             /// comboBoxes
             comboBoxBusqueda.Items.Clear();
 
             comboBoxBusqueda.Items.Add("Buscar por Código");
             comboBoxBusqueda.Items.Add("Buscar por Nombre");
-            comboBoxBusqueda.Items.Add("Buscar por Marca");
-            comboBoxBusqueda.Items.Add("Buscar por Categoría");
+            //  comboBoxBusqueda.Items.Add("Buscar por Marca");
+            //comboBoxBusqueda.Items.Add("Buscar por Categoría");
             comboBoxBusqueda.SelectedIndex = 0;
 
             ///
@@ -58,6 +58,8 @@ namespace Vista
             /// 
 
 
+
+
         }
 
 
@@ -66,16 +68,18 @@ namespace Vista
         {
 
             /// dgvList
-            List<Articulo> listArticulos = controller.ListarArticulos();
-            dgvList.DataSource = listArticulos;
+            articulos = controller.ListarArticulos();
+            dgvList.DataSource = articulos;
             dgvList.ReadOnly = true;
             dgvList.Columns["IdMarca"].HeaderText = "ID Marca";
+            dgvList.Columns["Id"].Visible = false;
             //    dgvList.Columns["IdMarca"].Visible = false;
             //    dgvList.Columns["idCategoria"].Visible = false;
             dgvList.Columns["idCategoria"].HeaderText = "ID Categoria";
+           
             dgvList.Columns["UrlImagen"].Visible = false;
             dgvList.Columns["Descripcion"].Visible = false;
-        
+
         }
 
 
@@ -98,7 +102,7 @@ namespace Vista
 
                     try
                     {
-                        PictureBoxArticulo.Load((string)fila.Cells[6].Value);
+                        PictureBoxArticulo.Load((string)fila.Cells[7].Value);
 
                     }
                     catch
@@ -106,13 +110,13 @@ namespace Vista
                         PictureBoxArticulo.Image = PictureBoxArticulo.ErrorImage;
                     }
 
-                    string PrecioArt = "$ " + fila.Cells[2].Value.ToString();
-                    string DescripcionArt = fila.Cells[5].Value.ToString();
+                    string PrecioArt = "$ " + fila.Cells[3].Value.ToString();
+                    string DescripcionArt = fila.Cells[6].Value.ToString();
 
                     /// traer desde la db
 
-                    string MarcaArt = controller.getMarcaById((int)fila.Cells[3].Value);
-                    string CategoriaArt = controller.getCategoriaById((int)fila.Cells[4].Value);
+                    string MarcaArt = controller.getMarcaById((int)fila.Cells[4].Value);
+                    string CategoriaArt = controller.getCategoriaById((int)fila.Cells[5].Value);
 
 
                     /// update de labels en la seccion
@@ -141,9 +145,9 @@ namespace Vista
             {
                 addfrm.ShowDialog();
 
-               
+
             }
-            this.ActualizarDatos();    
+            this.ActualizarDatos();
             this.btnNuevoProducto.Refresh();
 
         }
@@ -153,8 +157,12 @@ namespace Vista
         private void EditarProducto(DataGridViewRow selectedRow)
         {
 
+
+
+
             Articulo selectedArticulo = new Articulo
             {
+                Id = Convert.ToInt32(selectedRow.Cells["Id"].Value),
                 Codigo = selectedRow.Cells["Codigo"].Value.ToString(),
                 Nombre = selectedRow.Cells["Nombre"].Value.ToString(),
                 Precio = Convert.ToDecimal(selectedRow.Cells["Precio"].Value),
@@ -170,7 +178,7 @@ namespace Vista
             }
 
             this.ActualizarDatos();
-            this.btnEditar.Refresh();         
+            this.btnEditar.Refresh();
         }
 
         private void editar_Producto_btn(object sender, EventArgs e)
@@ -238,8 +246,8 @@ namespace Vista
                         if (dgvList.CurrentRow != null)
                         {
 
-                            string codigo = dgvList.CurrentRow.Cells["Codigo"].Value.ToString();
-                            int filasAfectadas = controller.EliminarArticulo(codigo);
+                            int id = (int)dgvList.CurrentRow.Cells["Id"].Value;
+                            int filasAfectadas = controller.EliminarArticulo(id);
 
                             if (filasAfectadas > 0)
                             {
@@ -271,16 +279,57 @@ namespace Vista
                 }
 
             }
-           
+
         }
+
 
 
         public void ActualizarDatos()
-        {       
-            var listaArticulos = controller.ListarArticulos();
-            dgvList.DataSource = listaArticulos;
+        {
+           /// this.dgvList.DataSource = null;
+            this.articulos = controller.ListarArticulos();
+            dgvList.DataSource = articulos;
             dgvList.Refresh();
         }
+
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            ActualizarDatos();
+            BusquedaFiltrada();
+        }
+
+
+        private void BusquedaFiltrada()
+        {
+            string criterioBusqueda = comboBoxBusqueda.SelectedItem.ToString();
+            string valorBusqueda = richTextBoxBuscar.Text.Trim().ToLower();
+
+            List<Articulo> resultados = new List<Articulo>();
+
+            switch (criterioBusqueda)
+            {
+                case "Buscar por Código":
+                    resultados = articulos.FindAll(art => art.Codigo.ToLower().Contains(valorBusqueda));
+                    break;
+                case "Buscar por Nombre":
+                    resultados = articulos.FindAll(art => art.Nombre.ToLower().Contains(valorBusqueda));
+                    break;
+
+
+
+                default:
+                    /// aunque no creo que pase jahgdjsh
+                    MessageBox.Show("Seleccione un criterio de búsqueda válido.");
+                    break;
+            }
+
+            dgvList.DataSource = resultados;  
+
+        }
+
+
+
 
 
 

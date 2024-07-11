@@ -4,6 +4,7 @@ namespace Modelo
     public class Articulo
     {
 
+        public int Id { get; set; }
 
         [DisplayName("Código")]
         public string Codigo { get; set; }
@@ -16,8 +17,10 @@ namespace Modelo
         public string Descripcion { get; set; }
         public string UrlImagen { get; set; }
 
-        public Articulo(string codigo, string nombre, decimal precio, int idMarca, int idCategoria, string descripcion, string urlImagen)
+
+        public Articulo(int id, string codigo, string nombre, decimal precio, int idMarca, int idCategoria, string descripcion, string urlImagen)
         {
+            Id = id;
             Codigo = codigo;
             Nombre = nombre;
             Precio = precio;
@@ -28,6 +31,24 @@ namespace Modelo
 
 
         }
+
+        public Articulo( string codigo, string nombre, decimal precio, int idMarca, int idCategoria, string descripcion, string urlImagen)
+        {
+          
+            Codigo = codigo;
+            Nombre = nombre;
+            Precio = precio;
+            IdMarca = idMarca;
+            IdCategoria = idCategoria;
+            Descripcion = descripcion;
+            UrlImagen = urlImagen;
+
+
+        }
+
+
+
+
         public Articulo() { }
 
         public override string ToString()

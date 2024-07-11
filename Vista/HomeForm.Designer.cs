@@ -123,7 +123,7 @@ namespace Vista
             // lblDescripcion
             // 
             this.lblDescripcion.ForeColor = System.Drawing.Color.White;
-            this.lblDescripcion.Location = new System.Drawing.Point(132, 376);
+            this.lblDescripcion.Location = new System.Drawing.Point(132, 374);
             this.lblDescripcion.Name = "lblDescripcion";
             this.lblDescripcion.Size = new System.Drawing.Size(190, 62);
             this.lblDescripcion.TabIndex = 26;
@@ -133,7 +133,7 @@ namespace Vista
             // 
             this.lblCategoria.AutoSize = true;
             this.lblCategoria.ForeColor = System.Drawing.Color.White;
-            this.lblCategoria.Location = new System.Drawing.Point(132, 346);
+            this.lblCategoria.Location = new System.Drawing.Point(132, 345);
             this.lblCategoria.Name = "lblCategoria";
             this.lblCategoria.Size = new System.Drawing.Size(35, 13);
             this.lblCategoria.TabIndex = 25;
@@ -176,7 +176,7 @@ namespace Vista
             // 
             this.lblEstaticoDescripcion.AutoSize = true;
             this.lblEstaticoDescripcion.ForeColor = System.Drawing.Color.White;
-            this.lblEstaticoDescripcion.Location = new System.Drawing.Point(32, 375);
+            this.lblEstaticoDescripcion.Location = new System.Drawing.Point(32, 373);
             this.lblEstaticoDescripcion.Name = "lblEstaticoDescripcion";
             this.lblEstaticoDescripcion.Size = new System.Drawing.Size(69, 13);
             this.lblEstaticoDescripcion.TabIndex = 20;
@@ -202,7 +202,7 @@ namespace Vista
             // 
             this.lblEstaticoCategoria.AutoSize = true;
             this.lblEstaticoCategoria.ForeColor = System.Drawing.Color.White;
-            this.lblEstaticoCategoria.Location = new System.Drawing.Point(32, 346);
+            this.lblEstaticoCategoria.Location = new System.Drawing.Point(32, 345);
             this.lblEstaticoCategoria.Name = "lblEstaticoCategoria";
             this.lblEstaticoCategoria.Size = new System.Drawing.Size(60, 13);
             this.lblEstaticoCategoria.TabIndex = 19;
@@ -267,6 +267,7 @@ namespace Vista
             this.btnBuscar.TabIndex = 3;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = false;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             this.btnBuscar.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
             this.btnBuscar.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
             // 
@@ -290,13 +291,13 @@ namespace Vista
             // 
             this.richTextBoxBuscar.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBoxBuscar.Location = new System.Drawing.Point(310, 39);
+            this.richTextBoxBuscar.MaxLength = 100;
             this.richTextBoxBuscar.Multiline = false;
             this.richTextBoxBuscar.Name = "richTextBoxBuscar";
             this.richTextBoxBuscar.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
             this.richTextBoxBuscar.Size = new System.Drawing.Size(240, 21);
             this.richTextBoxBuscar.TabIndex = 2;
             this.richTextBoxBuscar.Text = "";
-            this.richTextBoxBuscar.WordWrap = false;
             // 
             // HomeForm
             // 

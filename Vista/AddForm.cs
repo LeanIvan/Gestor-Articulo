@@ -80,7 +80,7 @@ namespace Vista
                 if (ValidarDatos(out string mensajeError))
                 {
 
-
+                    
                     string codigo = txtBoxCodigo.Text;
                     string nombre = txtNombre.Text;
                     string descripcion = txtBoxDescripcion.Text;
