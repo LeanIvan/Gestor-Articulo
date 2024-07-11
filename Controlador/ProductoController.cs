@@ -216,6 +216,74 @@ namespace Controlador
         }
 
 
+
+
+        public int EliminarArticulo(string Codigo)
+        {
+
+            string query = $"DELETE FROM ARTICULOS WHERE Codigo = @Codigo";
+
+            int filasAfectadas;
+
+            try
+            {
+                db.Abrir();
+
+                db.setQuery(query);
+                db.AgregarParametros("@Codigo",Codigo);
+               
+                filasAfectadas = db.EjecutarAccion();
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.ToString());
+
+            }
+            finally { db.Cerrar(); }
+            return filasAfectadas;
+        }
+
+
+
+        public int ActualizarArticulo(Articulo articulo)
+        {
+            int filasAfectadas = 0;
+
+            try
+            {
+                db.Abrir();
+
+                string query = "UPDATE ARTICULOS " +
+                               "SET Precio = @Precio, Nombre = @Nombre, Descripcion = @Descripcion, IdMarca = @IdMarca, IdCategoria = @IdCategoria, ImagenUrl = @ImagenUrl " +
+                               "WHERE Codigo = @Codigo";
+
+
+                db.setQuery(query);
+                db.AgregarParametros("@Precio", articulo.Precio);
+                db.AgregarParametros("@Nombre", articulo.Nombre);
+                db.AgregarParametros("@Descripcion", articulo.Descripcion);
+                db.AgregarParametros("@IdMarca", articulo.IdMarca);
+                db.AgregarParametros("@IdCategoria", articulo.IdCategoria);
+                db.AgregarParametros("@ImagenUrl", articulo.UrlImagen);
+                db.AgregarParametros("@Codigo", articulo.Codigo);
+
+                filasAfectadas = db.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al actualizar el artículo: " + ex.Message, ex);
+            }
+            finally
+            {
+                db.Cerrar();
+            }
+
+            return filasAfectadas;
+        }
+
+
+
     }
 }
 

@@ -31,3 +31,4 @@ C:\Users\ivana\Desktop\InventarioConMVC\GestorInventario\Vista\obj\Debug\Vista.p
 C:\Users\ivana\Desktop\InventarioConMVC\GestorInventario\Vista\obj\Debug\Vista.EditForm.resources
 C:\Users\ivana\Desktop\InventarioConMVC\GestorInventario\Vista\obj\Debug\Vista.AddForm.resources
 C:\Users\ivana\Desktop\InventarioConMVC\GestorInventario\Vista\obj\Debug\Vista.CheckImgForm.resources
+C:\Users\ivana\Desktop\InventarioConMVC\GestorInventario\Vista\obj\Debug\Vista.DeleteForm.resources

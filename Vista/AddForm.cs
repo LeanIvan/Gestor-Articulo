@@ -20,7 +20,7 @@ namespace Vista
 
             timer = new System.Windows.Forms.Timer();
             timer.Interval = 500;
-            timer.Tick += Timer_Tick;
+            timer.Tick += Timer_Tikitoc;
 
             controller = new ProductoController();
 
@@ -32,9 +32,6 @@ namespace Vista
             btnAceptar.Click += new EventHandler(btnAceptar_Click);
             btnCancelar.Click += new EventHandler(btnCancelar_Click);
             
-
-            // btnCheckImage.Click += new EventHandler();
-
 
         }
 
@@ -71,8 +68,6 @@ namespace Vista
             /// TextBoxes
             /// 
 
-
-
         }
 
 
@@ -89,7 +84,7 @@ namespace Vista
                     string codigo = txtBoxCodigo.Text;
                     string nombre = txtNombre.Text;
                     string descripcion = txtBoxDescripcion.Text;
-                    string urlImagen = string.Empty;
+                    string urlImagen = textBoxUrlImage.Text;
                     int idMarca = (int)comboBoxMarca.SelectedValue;
                     int idCategoria = (int)comboBoxCategoria.SelectedValue;
 
@@ -159,7 +154,7 @@ namespace Vista
             }
         }
 
-        private void Timer_Tick(object sender, EventArgs e)
+        private void Timer_Tikitoc(object sender, EventArgs e)
         {
             contadorParpadeo++;
 
@@ -193,13 +188,12 @@ namespace Vista
             }
         }
 
+
+
         private void ReproducirSonidoError()
         {
             System.Media.SystemSounds.Beep.Play();
         }
-
-
-
 
 
         private bool ValidarDatos(out string mensajeError)

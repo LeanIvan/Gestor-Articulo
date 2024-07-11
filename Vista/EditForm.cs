@@ -2,8 +2,6 @@
 using Modelo;
 using System;
 using System.Drawing;
-using System.Drawing.Text;
-using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 
 namespace Vista
@@ -36,18 +34,24 @@ namespace Vista
                 this.txtPrecio.Text = art.Precio.ToString();
                 this.textDescripcion.Text = art.Descripcion;
                 this.textBoxUrl.Text = art.UrlImagen;
-
+                
                 /// comboBoxs
                 /// 
 
-
                 comboBoxCategoria.DataSource = controller.ListarCategorias();
-                comboBoxMarca.DataSource = controller.ListarMarcas();
+                comboBoxCategoria.DisplayMember = "Descripcion"; /// La propiedad que va a mostrar
+                comboBoxCategoria.ValueMember = "Id";   /// la propiedad que va a usar como valor
 
+                comboBoxMarca.DataSource = controller.ListarMarcas();
+                comboBoxMarca.DisplayMember = "Descripcion"; 
+                comboBoxMarca.ValueMember = "Id";
+
+                comboBoxCategoria.SelectedValue = art.IdCategoria;
+                comboBoxMarca.SelectedValue = art.IdMarca;
 
             }
 
-             void Click_VerImg(Object sender, EventArgs e)
+            void Click_VerImg(Object sender, EventArgs e)
             {
                 CheckImgForm frm = new CheckImgForm(this.textBoxUrl.Text);
                 frm.ShowDialog();
@@ -56,7 +60,6 @@ namespace Vista
 
             void btnAceptar_Click(object sender, EventArgs e)
             {
-
 
                 this.DialogResult = DialogResult.OK;
                 this.Close();
@@ -88,7 +91,63 @@ namespace Vista
 
 
         }
+
+
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+
+        }
+
+        private void btnAceptar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                if (!decimal.TryParse(txtPrecio.Text, out decimal precio) || precio <= 0)
+                {
+                    MessageBox.Show("Por favor, ingrese un precio válido o mayor a 0.");
+                    return;
+                }
+
+                Articulo art = new Articulo
+                {
+                    Codigo = this.txtCodigo.Text,
+                    Nombre = this.txtNombre.Text,
+                    Precio = precio,
+                    Descripcion = this.textDescripcion.Text,
+                    UrlImagen = this.textBoxUrl.Text,
+                    IdCategoria = (int)this.comboBoxCategoria.SelectedValue,
+                    IdMarca = (int)this.comboBoxMarca.SelectedValue,
+                };
+
+                  int filasAfectadas =  controller.ActualizarArticulo(art);
+
+                
+              
+                if(filasAfectadas > 0)
+                {
+                    MessageBox.Show("Actualizado con Exito");
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.ToString());
+
+            }
+            finally
+            {
+                this.Close();
+            }
+
+        }
+
     }
 
 }
+
 

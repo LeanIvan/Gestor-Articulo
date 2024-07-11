@@ -57,6 +57,7 @@ namespace Vista
             this.txtCodigo.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtCodigo.ForeColor = System.Drawing.Color.Black;
             this.txtCodigo.Location = new System.Drawing.Point(106, 30);
+            this.txtCodigo.MaxLength = 50;
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.ReadOnly = true;
             this.txtCodigo.Size = new System.Drawing.Size(183, 25);
@@ -69,6 +70,7 @@ namespace Vista
             this.txtNombre.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtNombre.ForeColor = System.Drawing.Color.Black;
             this.txtNombre.Location = new System.Drawing.Point(106, 70);
+            this.txtNombre.MaxLength = 50;
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(183, 25);
             this.txtNombre.TabIndex = 1;
@@ -106,9 +108,10 @@ namespace Vista
             this.btnAceptar.Location = new System.Drawing.Point(106, 364);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(75, 32);
-            this.btnAceptar.TabIndex = 5;
+            this.btnAceptar.TabIndex = 8;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = false;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // btnCancelar
             // 
@@ -119,9 +122,10 @@ namespace Vista
             this.btnCancelar.Location = new System.Drawing.Point(214, 364);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 32);
-            this.btnCancelar.TabIndex = 6;
+            this.btnCancelar.TabIndex = 9;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = false;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // lblCodigo
             // 
@@ -194,7 +198,7 @@ namespace Vista
             this.comboBoxCategoria.Location = new System.Drawing.Point(106, 150);
             this.comboBoxCategoria.Name = "comboBoxCategoria";
             this.comboBoxCategoria.Size = new System.Drawing.Size(183, 25);
-            this.comboBoxCategoria.TabIndex = 12;
+            this.comboBoxCategoria.TabIndex = 3;
             // 
             // lblCategoria
             // 
@@ -211,10 +215,11 @@ namespace Vista
             // textDescripcion
             // 
             this.textDescripcion.Location = new System.Drawing.Point(106, 296);
+            this.textDescripcion.MaxLength = 150;
             this.textDescripcion.Multiline = true;
             this.textDescripcion.Name = "textDescripcion";
             this.textDescripcion.Size = new System.Drawing.Size(183, 63);
-            this.textDescripcion.TabIndex = 14;
+            this.textDescripcion.TabIndex = 7;
             // 
             // lblUrlImage
             // 
@@ -232,9 +237,10 @@ namespace Vista
             this.textBoxUrl.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.textBoxUrl.ForeColor = System.Drawing.Color.Black;
             this.textBoxUrl.Location = new System.Drawing.Point(106, 234);
+            this.textBoxUrl.MaxLength = 1000;
             this.textBoxUrl.Name = "textBoxUrl";
             this.textBoxUrl.Size = new System.Drawing.Size(183, 25);
-            this.textBoxUrl.TabIndex = 16;
+            this.textBoxUrl.TabIndex = 5;
             // 
             // btnCheckImage
             // 
@@ -242,7 +248,7 @@ namespace Vista
             this.btnCheckImage.Location = new System.Drawing.Point(158, 263);
             this.btnCheckImage.Name = "btnCheckImage";
             this.btnCheckImage.Size = new System.Drawing.Size(75, 25);
-            this.btnCheckImage.TabIndex = 17;
+            this.btnCheckImage.TabIndex = 6;
             this.btnCheckImage.Text = "Ver Imagen";
             this.btnCheckImage.UseVisualStyleBackColor = true;
             // 

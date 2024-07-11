@@ -62,6 +62,7 @@ namespace Vista
             this.dgvList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvList.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvList.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.dgvList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvList.GridColor = System.Drawing.SystemColors.InactiveCaptionText;
@@ -191,7 +192,7 @@ namespace Vista
             this.btnEditar.Location = new System.Drawing.Point(0, 441);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(165, 43);
-            this.btnEditar.TabIndex = 14;
+            this.btnEditar.TabIndex = 0;
             this.btnEditar.Text = "Editar";
             this.btnEditar.UseVisualStyleBackColor = false;
             this.btnEditar.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
@@ -217,9 +218,10 @@ namespace Vista
             this.btnEliminarArticulo.Location = new System.Drawing.Point(162, 441);
             this.btnEliminarArticulo.Name = "btnEliminarArticulo";
             this.btnEliminarArticulo.Size = new System.Drawing.Size(165, 43);
-            this.btnEliminarArticulo.TabIndex = 13;
+            this.btnEliminarArticulo.TabIndex = 1;
             this.btnEliminarArticulo.Text = "Eliminar";
             this.btnEliminarArticulo.UseVisualStyleBackColor = false;
+            this.btnEliminarArticulo.Click += new System.EventHandler(this.btnEliminarArticulo_Click);
             this.btnEliminarArticulo.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
             this.btnEliminarArticulo.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
             // 
@@ -252,7 +254,7 @@ namespace Vista
             this.comboBoxBusqueda.Location = new System.Drawing.Point(160, 39);
             this.comboBoxBusqueda.Name = "comboBoxBusqueda";
             this.comboBoxBusqueda.Size = new System.Drawing.Size(149, 21);
-            this.comboBoxBusqueda.TabIndex = 17;
+            this.comboBoxBusqueda.TabIndex = 1;
             // 
             // btnBuscar
             // 
@@ -262,7 +264,7 @@ namespace Vista
             this.btnBuscar.Location = new System.Drawing.Point(550, 38);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(138, 23);
-            this.btnBuscar.TabIndex = 16;
+            this.btnBuscar.TabIndex = 3;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = false;
             this.btnBuscar.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
@@ -292,7 +294,7 @@ namespace Vista
             this.richTextBoxBuscar.Name = "richTextBoxBuscar";
             this.richTextBoxBuscar.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
             this.richTextBoxBuscar.Size = new System.Drawing.Size(240, 21);
-            this.richTextBoxBuscar.TabIndex = 18;
+            this.richTextBoxBuscar.TabIndex = 2;
             this.richTextBoxBuscar.Text = "";
             this.richTextBoxBuscar.WordWrap = false;
             // 

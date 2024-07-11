@@ -3,6 +3,8 @@ using Modelo;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
+using System.Linq.Expressions;
 using System.Windows.Forms;
 
 namespace Vista
@@ -10,7 +12,10 @@ namespace Vista
     public partial class HomeForm : Form
     {
 
+
         public ProductoController controller = new ProductoController();
+        string ruta = AppDomain.CurrentDomain.BaseDirectory;
+
 
 
         public HomeForm()
@@ -43,22 +48,14 @@ namespace Vista
             comboBoxBusqueda.Items.Add("Buscar por Categoría");
             comboBoxBusqueda.SelectedIndex = 0;
 
-
-
             ///
             PanelInfo.BackColor = Color.FromArgb(128, 26, 32, 40);
-
-
             /// btns
             /// 
             btnEditar.Click += new EventHandler(editar_Producto_btn);
 
-
-
-
             /// txtBox
             /// 
-
 
 
         }
@@ -78,9 +75,7 @@ namespace Vista
             dgvList.Columns["idCategoria"].HeaderText = "ID Categoria";
             dgvList.Columns["UrlImagen"].Visible = false;
             dgvList.Columns["Descripcion"].Visible = false;
-            ///  PictureBoxArticulo.Load(listArticulos[0].UrlImagen);
-
-
+        
         }
 
 
@@ -89,42 +84,51 @@ namespace Vista
 
         private void ActualizarSeccionProductos(object sender, EventArgs e)
         {
-            DataGridViewRow fila = dgvList.CurrentRow;
-            if (fila != null)
+
+            try
             {
-                /// la url está en el indice 6
-                ///      
 
-                try
+                DataGridViewRow fila = dgvList.CurrentRow;
+
+                if (fila != null)
                 {
 
-                    PictureBoxArticulo.Load((string)fila.Cells[6].Value);
-                
+                    /// la url está en el indice 6
+                    ///      
 
-                }catch (Exception ex)
-                {
+                    try
+                    {
+                        PictureBoxArticulo.Load((string)fila.Cells[6].Value);
 
-                    PictureBoxArticulo.Load("https://previews.123rf.com/images/koblizeek/koblizeek2208/koblizeek220800254/190563481-sin-s%C3%ADmbolo-de-vector-de-imagen-falta-el-icono-disponible-no-hay-galer%C3%ADa-para-este-marcador-de.jpg");
-               
+                    }
+                    catch
+                    {
+                        PictureBoxArticulo.Image = PictureBoxArticulo.ErrorImage;
+                    }
+
+                    string PrecioArt = "$ " + fila.Cells[2].Value.ToString();
+                    string DescripcionArt = fila.Cells[5].Value.ToString();
+
+                    /// traer desde la db
+
+                    string MarcaArt = controller.getMarcaById((int)fila.Cells[3].Value);
+                    string CategoriaArt = controller.getCategoriaById((int)fila.Cells[4].Value);
+
+
+                    /// update de labels en la seccion
+                    /// 
+
+                    lblMarca.Text = MarcaArt;
+                    lblCategoria.Text = CategoriaArt;
+                    lblPrecio.Text = PrecioArt;
+                    lblDescripcion.Text = DescripcionArt;
+
                 }
+            }
+            catch (Exception ex)
+            {
 
-                string PrecioArt = "$ " + fila.Cells[2].Value.ToString();
-                string DescripcionArt = fila.Cells[5].Value.ToString();
-
-                /// traer desde la db
-
-                string MarcaArt = controller.getMarcaById((int)fila.Cells[3].Value);
-                string CategoriaArt = controller.getCategoriaById((int)fila.Cells[4].Value);
-
-
-                /// update de labels en la seccion
-                /// 
-
-                lblMarca.Text = MarcaArt;
-                lblCategoria.Text = CategoriaArt;
-                lblPrecio.Text = PrecioArt;
-                lblDescripcion.Text = DescripcionArt;
-
+                throw new Exception(ex.ToString());
             }
 
         }
@@ -133,10 +137,17 @@ namespace Vista
 
         private void btnNuevoProducto_Click(object sender, EventArgs e)
         {
-            AddForm addfrm = new AddForm();
-            addfrm.ShowDialog();
+            using (AddForm addfrm = new AddForm())
+            {
+                addfrm.ShowDialog();
+
+               
+            }
+            this.ActualizarDatos();    
+            this.btnNuevoProducto.Refresh();
 
         }
+
 
 
         private void EditarProducto(DataGridViewRow selectedRow)
@@ -153,10 +164,13 @@ namespace Vista
                 UrlImagen = selectedRow.Cells["UrlImagen"].Value.ToString()
             };
 
+            using (EditForm editForm = new EditForm(selectedArticulo))
+            {
+                editForm.ShowDialog();
+            }
 
-            EditForm editForm = new EditForm(selectedArticulo);
-
-            editForm.ShowDialog();
+            this.ActualizarDatos();
+            this.btnEditar.Refresh();         
         }
 
         private void editar_Producto_btn(object sender, EventArgs e)
@@ -194,6 +208,8 @@ namespace Vista
             }
         }
 
+
+
         private void Button_MouseLeave(object sender, EventArgs e)
         {
             Button button = sender as Button;
@@ -204,6 +220,69 @@ namespace Vista
 
             }
         }
+
+
+        private void btnEliminarArticulo_Click(object sender, EventArgs e)
+        {
+
+            using (DeleteForm frm = new DeleteForm())
+            {
+
+                DialogResult result = frm.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+
+                    try
+                    {
+                        if (dgvList.CurrentRow != null)
+                        {
+
+                            string codigo = dgvList.CurrentRow.Cells["Codigo"].Value.ToString();
+                            int filasAfectadas = controller.EliminarArticulo(codigo);
+
+                            if (filasAfectadas > 0)
+                            {
+                                MessageBox.Show("Artículo eliminado con éxito.");
+
+                                this.ActualizarDatos();
+                                this.btnEliminarArticulo.Refresh();
+                                return;
+
+                            }
+                            else
+                            {
+                                MessageBox.Show("No se pudo eliminar el artículo.");
+                                this.btnEliminarArticulo.Refresh();
+
+                                return;
+                            }
+                        }
+
+                    }
+                    catch
+                    {
+                        MessageBox.Show("No se pudo eliminar el artículo.");
+                        this.btnEliminarArticulo.Refresh();
+                        return;
+
+                    }
+
+                }
+
+            }
+           
+        }
+
+
+        public void ActualizarDatos()
+        {       
+            var listaArticulos = controller.ListarArticulos();
+            dgvList.DataSource = listaArticulos;
+            dgvList.Refresh();
+        }
+
+
 
     }
 

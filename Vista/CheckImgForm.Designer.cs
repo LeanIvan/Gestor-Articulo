@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheckImgForm));
             this.pictureBoxCheck = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCheck)).BeginInit();
             this.SuspendLayout();
@@ -39,9 +40,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBoxCheck.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBoxCheck.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBoxCheck.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxCheck.ErrorImage")));
             this.pictureBoxCheck.Location = new System.Drawing.Point(12, 12);
             this.pictureBoxCheck.Name = "pictureBoxCheck";
-            this.pictureBoxCheck.Size = new System.Drawing.Size(378, 287);
+            this.pictureBoxCheck.Size = new System.Drawing.Size(378, 349);
             this.pictureBoxCheck.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxCheck.TabIndex = 0;
             this.pictureBoxCheck.TabStop = false;
@@ -50,7 +52,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(402, 311);
+            this.ClientSize = new System.Drawing.Size(402, 373);
             this.Controls.Add(this.pictureBoxCheck);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
