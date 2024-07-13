@@ -48,11 +48,18 @@ namespace Vista
             this.lblEstaticoPrecio = new System.Windows.Forms.Label();
             this.comboBoxBusqueda = new System.Windows.Forms.ComboBox();
             this.btnBuscar = new System.Windows.Forms.Button();
-            this.btnNuevoProducto = new System.Windows.Forms.Button();
             this.richTextBoxBuscar = new System.Windows.Forms.RichTextBox();
+            this.menuStripBar = new System.Windows.Forms.MenuStrip();
+            this.nuevoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.articuloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.marcaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.categoriaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.opcionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.comboBoxFiltroMarca = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.PanelInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxArticulo)).BeginInit();
+            this.menuStripBar.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvList
@@ -76,7 +83,7 @@ namespace Vista
             this.dgvList.Size = new System.Drawing.Size(665, 445);
             this.dgvList.TabIndex = 0;
             this.dgvList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ActualizarSeccionProductos);
-            this.dgvList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvList_CellDoubleClick);
+            this.dgvList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvList_CellDoubleClick);
             this.dgvList.SelectionChanged += new System.EventHandler(this.ActualizarSeccionProductos);
             // 
             // PanelInfo
@@ -187,7 +194,7 @@ namespace Vista
             this.btnEditar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(163)))), ((int)(((byte)(0)))));
             this.btnEditar.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnEditar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEditar.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold);
+            this.btnEditar.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEditar.ForeColor = System.Drawing.Color.Black;
             this.btnEditar.Location = new System.Drawing.Point(0, 441);
             this.btnEditar.Name = "btnEditar";
@@ -214,14 +221,14 @@ namespace Vista
             this.btnEliminarArticulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(163)))), ((int)(((byte)(0)))));
             this.btnEliminarArticulo.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnEliminarArticulo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEliminarArticulo.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEliminarArticulo.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEliminarArticulo.Location = new System.Drawing.Point(162, 441);
             this.btnEliminarArticulo.Name = "btnEliminarArticulo";
             this.btnEliminarArticulo.Size = new System.Drawing.Size(165, 43);
             this.btnEliminarArticulo.TabIndex = 1;
             this.btnEliminarArticulo.Text = "Eliminar";
             this.btnEliminarArticulo.UseVisualStyleBackColor = false;
-            this.btnEliminarArticulo.Click += new System.EventHandler(this.btnEliminarArticulo_Click);
+            this.btnEliminarArticulo.Click += new System.EventHandler(this.BtnEliminarArticulo_Click);
             this.btnEliminarArticulo.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
             this.btnEliminarArticulo.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
             // 
@@ -251,41 +258,26 @@ namespace Vista
             this.comboBoxBusqueda.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxBusqueda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxBusqueda.FormattingEnabled = true;
-            this.comboBoxBusqueda.Location = new System.Drawing.Point(160, 39);
+            this.comboBoxBusqueda.Location = new System.Drawing.Point(164, 39);
             this.comboBoxBusqueda.Name = "comboBoxBusqueda";
-            this.comboBoxBusqueda.Size = new System.Drawing.Size(149, 21);
+            this.comboBoxBusqueda.Size = new System.Drawing.Size(145, 21);
             this.comboBoxBusqueda.TabIndex = 1;
             // 
             // btnBuscar
             // 
-            this.btnBuscar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(163)))), ((int)(((byte)(0)))));
+            this.btnBuscar.BackColor = System.Drawing.SystemColors.Window;
             this.btnBuscar.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBuscar.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBuscar.Location = new System.Drawing.Point(550, 38);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(138, 23);
             this.btnBuscar.TabIndex = 3;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = false;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            this.btnBuscar.Click += new System.EventHandler(this.BtnBuscar_Click);
             this.btnBuscar.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
             this.btnBuscar.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
-            // 
-            // btnNuevoProducto
-            // 
-            this.btnNuevoProducto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(163)))), ((int)(((byte)(0)))));
-            this.btnNuevoProducto.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnNuevoProducto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNuevoProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.btnNuevoProducto.Location = new System.Drawing.Point(22, 38);
-            this.btnNuevoProducto.Name = "btnNuevoProducto";
-            this.btnNuevoProducto.Size = new System.Drawing.Size(138, 23);
-            this.btnNuevoProducto.TabIndex = 0;
-            this.btnNuevoProducto.Text = "Nuevo";
-            this.btnNuevoProducto.UseVisualStyleBackColor = false;
-            this.btnNuevoProducto.Click += new System.EventHandler(this.btnNuevoProducto_Click);
-            this.btnNuevoProducto.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
-            this.btnNuevoProducto.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
             // 
             // richTextBoxBuscar
             // 
@@ -299,18 +291,78 @@ namespace Vista
             this.richTextBoxBuscar.TabIndex = 2;
             this.richTextBoxBuscar.Text = "";
             // 
+            // menuStripBar
+            // 
+            this.menuStripBar.AutoSize = false;
+            this.menuStripBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(163)))), ((int)(((byte)(0)))));
+            this.menuStripBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.nuevoToolStripMenuItem,
+            this.opcionesToolStripMenuItem});
+            this.menuStripBar.Location = new System.Drawing.Point(0, 0);
+            this.menuStripBar.Name = "menuStripBar";
+            this.menuStripBar.Size = new System.Drawing.Size(1054, 27);
+            this.menuStripBar.TabIndex = 7;
+            this.menuStripBar.Text = "menuStrip";
+            // 
+            // nuevoToolStripMenuItem
+            // 
+            this.nuevoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.articuloToolStripMenuItem,
+            this.marcaToolStripMenuItem,
+            this.categoriaToolStripMenuItem});
+            this.nuevoToolStripMenuItem.Name = "nuevoToolStripMenuItem";
+            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(54, 23);
+            this.nuevoToolStripMenuItem.Text = "Nuevo";
+            // 
+            // articuloToolStripMenuItem
+            // 
+            this.articuloToolStripMenuItem.Name = "articuloToolStripMenuItem";
+            this.articuloToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.articuloToolStripMenuItem.Text = "Articulo";
+            // 
+            // marcaToolStripMenuItem
+            // 
+            this.marcaToolStripMenuItem.Name = "marcaToolStripMenuItem";
+            this.marcaToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.marcaToolStripMenuItem.Text = "Marca";
+            // 
+            // categoriaToolStripMenuItem
+            // 
+            this.categoriaToolStripMenuItem.Name = "categoriaToolStripMenuItem";
+            this.categoriaToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.categoriaToolStripMenuItem.Text = "Categoria";
+            // 
+            // opcionesToolStripMenuItem
+            // 
+            this.opcionesToolStripMenuItem.Name = "opcionesToolStripMenuItem";
+            this.opcionesToolStripMenuItem.Size = new System.Drawing.Size(69, 23);
+            this.opcionesToolStripMenuItem.Text = "Opciones";
+            // 
+            // comboBoxFiltroMarca
+            // 
+            this.comboBoxFiltroMarca.BackColor = System.Drawing.Color.White;
+            this.comboBoxFiltroMarca.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxFiltroMarca.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBoxFiltroMarca.FormattingEnabled = true;
+            this.comboBoxFiltroMarca.Location = new System.Drawing.Point(23, 39);
+            this.comboBoxFiltroMarca.Name = "comboBoxFiltroMarca";
+            this.comboBoxFiltroMarca.Size = new System.Drawing.Size(140, 21);
+            this.comboBoxFiltroMarca.TabIndex = 8;
+            // 
             // HomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(34)))), ((int)(((byte)(43)))));
-            this.ClientSize = new System.Drawing.Size(1044, 534);
+            this.ClientSize = new System.Drawing.Size(1054, 546);
+            this.Controls.Add(this.comboBoxFiltroMarca);
             this.Controls.Add(this.richTextBoxBuscar);
-            this.Controls.Add(this.btnNuevoProducto);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.PanelInfo);
             this.Controls.Add(this.comboBoxBusqueda);
             this.Controls.Add(this.dgvList);
+            this.Controls.Add(this.menuStripBar);
+            this.MainMenuStrip = this.menuStripBar;
             this.MaximizeBox = false;
             this.Name = "HomeForm";
             this.Opacity = 0.97D;
@@ -321,6 +373,8 @@ namespace Vista
             this.PanelInfo.ResumeLayout(false);
             this.PanelInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxArticulo)).EndInit();
+            this.menuStripBar.ResumeLayout(false);
+            this.menuStripBar.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -344,9 +398,15 @@ namespace Vista
         private Panel panelLineLeft;
         private ComboBox comboBoxBusqueda;
         private Button btnBuscar;
-        private Button btnNuevoProducto;
         private RichTextBox richTextBoxBuscar;
         private Panel panelLineMid;
+        private MenuStrip menuStripBar;
+        private ToolStripMenuItem nuevoToolStripMenuItem;
+        private ToolStripMenuItem articuloToolStripMenuItem;
+        private ToolStripMenuItem marcaToolStripMenuItem;
+        private ToolStripMenuItem categoriaToolStripMenuItem;
+        private ToolStripMenuItem opcionesToolStripMenuItem;
+        private ComboBox comboBoxFiltroMarca;
     }
 }
 

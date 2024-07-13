@@ -47,8 +47,8 @@ namespace Vista
                 comboBoxMarca.DisplayMember = "Descripcion"; 
                 comboBoxMarca.ValueMember = "Id";
 
-                comboBoxCategoria.SelectedValue = art.IdCategoria;
-                comboBoxMarca.SelectedValue = art.IdMarca;
+                comboBoxCategoria.SelectedValue = art.Categoria.Id;
+                comboBoxMarca.SelectedValue = art.Marca.Id;
 
             }
 
@@ -124,8 +124,8 @@ namespace Vista
                     Precio = precio,
                     Descripcion = this.textDescripcion.Text,
                     UrlImagen = this.textBoxUrl.Text,
-                    IdCategoria = (int)this.comboBoxCategoria.SelectedValue,
-                    IdMarca = (int)this.comboBoxMarca.SelectedValue,
+                    Categoria = (Categoria)this.comboBoxCategoria.SelectedItem,
+                    Marca = (Marca)this.comboBoxMarca.SelectedItem,
                 };
 
                   int filasAfectadas =  controller.ActualizarArticulo(art);
@@ -151,6 +151,24 @@ namespace Vista
 
         }
 
+        private void btnAddFile_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+             openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png";
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK) {
+
+                string archNombre = openFileDialog.FileName;
+
+              
+
+            }
+            
+            
+            
+          
+
+        }
     }
 
 }

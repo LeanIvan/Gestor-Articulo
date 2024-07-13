@@ -60,6 +60,7 @@ namespace Vista
             this.btnCheckImage = new System.Windows.Forms.Button();
             this.lblUrlImage = new System.Windows.Forms.Label();
             this.textBoxUrlImage = new System.Windows.Forms.TextBox();
+            this.btnAddFile = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtNombre
@@ -104,7 +105,7 @@ namespace Vista
             this.btnAceptar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAceptar.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.btnAceptar.ForeColor = System.Drawing.Color.White;
-            this.btnAceptar.Location = new System.Drawing.Point(109, 353);
+            this.btnAceptar.Location = new System.Drawing.Point(108, 353);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(75, 32);
             this.btnAceptar.TabIndex = 8;
@@ -263,11 +264,22 @@ namespace Vista
             this.textBoxUrlImage.Size = new System.Drawing.Size(150, 25);
             this.textBoxUrlImage.TabIndex = 5;
             // 
+            // btnAddFile
+            // 
+            this.btnAddFile.Location = new System.Drawing.Point(261, 220);
+            this.btnAddFile.Name = "btnAddFile";
+            this.btnAddFile.Size = new System.Drawing.Size(22, 22);
+            this.btnAddFile.TabIndex = 19;
+            this.btnAddFile.Text = "+";
+            this.btnAddFile.UseVisualStyleBackColor = true;
+            this.btnAddFile.Click += new System.EventHandler(this.btnAddFile_Click);
+            // 
             // AddForm
             // 
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(295, 396);
+            this.ClientSize = new System.Drawing.Size(286, 396);
+            this.Controls.Add(this.btnAddFile);
             this.Controls.Add(this.textBoxUrlImage);
             this.Controls.Add(this.lblUrlImage);
             this.Controls.Add(this.btnCheckImage);
@@ -306,5 +318,6 @@ namespace Vista
         private Button btnCheckImage;
         private Label lblUrlImage;
         private TextBox textBoxUrlImage;
+        private Button btnAddFile;
     }
 }

@@ -32,3 +32,5 @@ C:\Users\ivana\Desktop\InventarioConMVC\GestorInventario\Vista\obj\Debug\Vista.E
 C:\Users\ivana\Desktop\InventarioConMVC\GestorInventario\Vista\obj\Debug\Vista.AddForm.resources
 C:\Users\ivana\Desktop\InventarioConMVC\GestorInventario\Vista\obj\Debug\Vista.CheckImgForm.resources
 C:\Users\ivana\Desktop\InventarioConMVC\GestorInventario\Vista\obj\Debug\Vista.DeleteForm.resources
+C:\Users\ivana\Desktop\InventarioConMVC\GestorInventario\Vista\obj\Debug\Vista.NewCategoryForm.resources
+C:\Users\ivana\Desktop\InventarioConMVC\GestorInventario\Vista\obj\Debug\Vista.NewMarcaForm.resources

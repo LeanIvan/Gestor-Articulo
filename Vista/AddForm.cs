@@ -77,48 +77,42 @@ namespace Vista
         {
             try
             {
-                if (ValidarDatos(out string mensajeError))
+                string codigo = txtBoxCodigo.Text;
+                string nombre = txtNombre.Text;
+                string descripcion = txtBoxDescripcion.Text;
+                string urlImagen = textBoxUrlImage.Text;
+                Marca marca = (Marca)comboBoxMarca.SelectedItem; 
+                Categoria categoria = (Categoria)comboBoxCategoria.SelectedItem; 
+
+                if (!decimal.TryParse(txtPrecio.Text, out decimal precio) || precio <= 0)
                 {
-
-                    
-                    string codigo = txtBoxCodigo.Text;
-                    string nombre = txtNombre.Text;
-                    string descripcion = txtBoxDescripcion.Text;
-                    string urlImagen = textBoxUrlImage.Text;
-                    int idMarca = (int)comboBoxMarca.SelectedValue;
-                    int idCategoria = (int)comboBoxCategoria.SelectedValue;
-
-
-
-                    if (!decimal.TryParse(txtPrecio.Text, out decimal precio) || precio <= 0)
-                    {
-                        MessageBox.Show("Por favor, ingrese un precio válido mayor a 0.");
-                        return;
-                    }
-
-                    // Si está validado, añadir a la db
-                    int rowsAfectadas = controller.InsertarArticulo(new Articulo(codigo, nombre, precio, idMarca, idCategoria, descripcion, urlImagen));
-
-                    if (rowsAfectadas > 0)
-                    {
-                        MessageBox.Show("Artículo añadido con éxito.");
-                        this.DialogResult = DialogResult.OK;
-
-                    }
-                    else
-                    {
-
-                        throw new Exception("no se pudo agregar");
-                    }
+                    MessageBox.Show("Por favor, ingrese un precio válido mayor a 0.");
+                    return;
                 }
 
-                else
+                
+                if (!ValidarDatos(out string mensajeError))
                 {
-                    // Mostrar mensaje de error y activar el Timer y el sonido de error .{ revisar en casos especiales
+                   
                     ReproducirSonidoError();
                     MessageBox.Show(mensajeError);
                     timer.Start();
-                    this.DialogResult = DialogResult.None; // No cerrar el formulario
+                    this.DialogResult = DialogResult.None; 
+                    return;
+                }
+
+               
+                Articulo nuevoArticulo = new Articulo(codigo, nombre, precio, marca, categoria, descripcion, urlImagen);
+                int rowsAfectadas = controller.InsertarArticulo(nuevoArticulo);
+
+                if (rowsAfectadas > 0)
+                {
+                    MessageBox.Show("Artículo añadido con éxito.");
+                    this.DialogResult = DialogResult.OK;
+                }
+                else
+                {
+                    throw new Exception("No se pudo agregar el artículo.");
                 }
             }
             catch (Exception ex)
@@ -126,6 +120,10 @@ namespace Vista
                 MessageBox.Show("Error al agregar Producto: " + ex.Message);
             }
         }
+
+
+
+
 
 
 
@@ -240,6 +238,16 @@ namespace Vista
           CheckImgForm formImg = new CheckImgForm(this.textBoxUrlImage.Text);
 
             formImg.ShowDialog();
+
+        }
+
+        private void btnAddFile_Click(object sender, EventArgs e)
+        {
+
+            OpenFileDialog ofd = new OpenFileDialog();
+
+
+
 
         }
     }

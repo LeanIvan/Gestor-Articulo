@@ -53,29 +53,30 @@ namespace Controlador
 
 
 
-
-        public string getMarcaById(int id)
+        public Marca getMarcaById(int id)
         {
-
-            string marca = string.Empty;
+            Marca marca = new Marca();
 
             try
             {
-
                 db.Abrir();
-                db.EjecutarQuery($"select Descripcion from MARCAS M where M.Id ={id}");
+                db.EjecutarQuery($"SELECT Id, Descripcion FROM MARCAS WHERE Id = {id}");
                 SqlDataReader reader = db.Command.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    marca = reader["Descripcion"].ToString();
+                    marca.Id = Convert.ToInt32(reader["Id"]);
+                    marca.Descripcion = reader["Descripcion"].ToString();
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.ToString());
+                throw new Exception("Error al obtener la marca por ID: " + ex.Message, ex);
             }
-            finally { db.Cerrar(); }
+            finally
+            {
+                db.Cerrar();
+            }
 
             return marca;
         }
@@ -84,25 +85,30 @@ namespace Controlador
 
 
 
-        public string getCategoriaById(int id)
+        public Categoria getCategoriaById(int id)
         {
-            string cat = string.Empty;
+            Categoria cat = new Categoria();
 
             try
             {
                 db.Abrir();
-                db.EjecutarQuery($"select Descripcion from CATEGORIAS C where C.Id = {id}");
+                db.EjecutarQuery($"SELECT Id, Descripcion FROM CATEGORIAS WHERE Id = {id}");
                 SqlDataReader reader = db.Command.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    cat = reader["Descripcion"].ToString();
+                    cat.Id = Convert.ToInt32(reader["Id"]);
+                    cat.Descripcion = reader["Descripcion"].ToString();
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.ToString());
-            }finally { db.Cerrar(); }
+                throw new Exception("Error al obtener la categoría por ID: " + ex.Message, ex);
+            }
+            finally
+            {
+                db.Cerrar();
+            }
 
             return cat;
         }
@@ -145,10 +151,16 @@ namespace Controlador
 
         public List<Articulo> ListarArticulos()
         {
-
-            string query = "SELECT A.Id, A.Codigo,A.Nombre,A.Descripcion,A.Precio,A.IdMarca,A.IdCategoria,A.ImagenUrl FROM ARTICULOS A";
+            string query = @"
+        SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, A.Precio, A.IdMarca, A.IdCategoria, A.ImagenUrl,
+               M.Descripcion AS MarcaDescripcion,
+               C.Descripcion AS CategoriaDescripcion
+        FROM ARTICULOS A
+        INNER JOIN MARCAS M ON A.IdMarca = M.Id
+        INNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id";
 
             List<Articulo> articulos = new List<Articulo>();
+
             try
             {
                 db.Abrir();
@@ -157,25 +169,41 @@ namespace Controlador
 
                 while (reader.Read())
                 {
-                    Articulo articulo = new Articulo(
-                        (int)reader["Id"],
-                        (string)reader["Codigo"],
-                        (string)reader["Nombre"],
-                        (decimal)reader["Precio"],
-                        (int)reader["IdMarca"],
-                        (int)reader["IdCategoria"],
-                        (string)reader["Descripcion"],
-                        (string)reader["ImagenUrl"]
-                    );
+                    Marca marca = new Marca
+                    {
+                        Id = (int)reader["IdMarca"],
+                        Descripcion = (string)reader["MarcaDescripcion"]
+                    };
+
+                    Categoria categoria = new Categoria
+                    {
+                        Id = (int)reader["IdCategoria"],
+                        Descripcion = (string)reader["CategoriaDescripcion"]
+                    };
+
+                    Articulo articulo = new Articulo
+                    {
+                        Id = (int)reader["Id"],
+                        Codigo = (string)reader["Codigo"],
+                        Nombre = (string)reader["Nombre"],
+                        Precio = (decimal)reader["Precio"],
+                        Marca = marca,
+                        Categoria = categoria,
+                        Descripcion = (string)reader["Descripcion"],
+                        UrlImagen = (string)reader["ImagenUrl"]
+                    };
 
                     articulos.Add(articulo);
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception("Error fetching list of Articulitos: " + ex.Message, ex);
+                throw new Exception("Error fetching list of Articulos: " + ex.Message, ex);
             }
-            finally { db.Cerrar(); }
+            finally
+            {
+                db.Cerrar();
+            }
 
             return articulos;
         }
@@ -200,8 +228,8 @@ namespace Controlador
                 db.AgregarParametros("@Codigo", articulo.Codigo);
                 db.AgregarParametros("@Nombre", articulo.Nombre);
                 db.AgregarParametros("@Descripcion", articulo.Descripcion);
-                db.AgregarParametros("@IdMarca", articulo.IdMarca);
-                db.AgregarParametros("@IdCategoria", articulo.IdCategoria);
+                db.AgregarParametros("@IdMarca", articulo.Marca.Id);
+                db.AgregarParametros("@IdCategoria", articulo.Categoria.Id);
                 db.AgregarParametros("@ImagenUrl", articulo.UrlImagen);
                 db.AgregarParametros("@Precio", articulo.Precio);
                 filasAfectadas = db.EjecutarAccion();
@@ -265,12 +293,13 @@ namespace Controlador
                 db.AgregarParametros("@Precio", articulo.Precio);
                 db.AgregarParametros("@Nombre", articulo.Nombre);
                 db.AgregarParametros("@Descripcion", articulo.Descripcion);
-                db.AgregarParametros("@IdMarca", articulo.IdMarca);
-                db.AgregarParametros("@IdCategoria", articulo.IdCategoria);
+                db.AgregarParametros("@IdMarca", articulo.Marca.Id);
+                db.AgregarParametros("@IdCategoria", articulo.Marca.Id);
                 db.AgregarParametros("@ImagenUrl", articulo.UrlImagen);
                 db.AgregarParametros("@Codigo", articulo.Codigo);
 
                 filasAfectadas = db.EjecutarAccion();
+
             }
             catch (Exception ex)
             {

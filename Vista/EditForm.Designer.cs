@@ -50,6 +50,7 @@ namespace Vista
             this.btnCheckImage = new System.Windows.Forms.Button();
             this.lblId = new System.Windows.Forms.Label();
             this.textBoxId = new System.Windows.Forms.TextBox();
+            this.btnAddFile = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtCodigo
@@ -58,11 +59,11 @@ namespace Vista
             this.txtCodigo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtCodigo.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtCodigo.ForeColor = System.Drawing.Color.Black;
-            this.txtCodigo.Location = new System.Drawing.Point(106, 47);
+            this.txtCodigo.Location = new System.Drawing.Point(109, 47);
             this.txtCodigo.MaxLength = 50;
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.ReadOnly = true;
-            this.txtCodigo.Size = new System.Drawing.Size(183, 25);
+            this.txtCodigo.Size = new System.Drawing.Size(171, 25);
             this.txtCodigo.TabIndex = 0;
             // 
             // txtNombre
@@ -71,10 +72,10 @@ namespace Vista
             this.txtNombre.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtNombre.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtNombre.ForeColor = System.Drawing.Color.Black;
-            this.txtNombre.Location = new System.Drawing.Point(106, 87);
+            this.txtNombre.Location = new System.Drawing.Point(109, 87);
             this.txtNombre.MaxLength = 50;
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(183, 25);
+            this.txtNombre.Size = new System.Drawing.Size(171, 25);
             this.txtNombre.TabIndex = 1;
             // 
             // txtPrecio
@@ -83,9 +84,9 @@ namespace Vista
             this.txtPrecio.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtPrecio.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtPrecio.ForeColor = System.Drawing.Color.Black;
-            this.txtPrecio.Location = new System.Drawing.Point(106, 125);
+            this.txtPrecio.Location = new System.Drawing.Point(109, 125);
             this.txtPrecio.Name = "txtPrecio";
-            this.txtPrecio.Size = new System.Drawing.Size(183, 25);
+            this.txtPrecio.Size = new System.Drawing.Size(171, 25);
             this.txtPrecio.TabIndex = 2;
             // 
             // comboBoxMarca
@@ -96,9 +97,9 @@ namespace Vista
             this.comboBoxMarca.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.comboBoxMarca.ForeColor = System.Drawing.Color.Black;
             this.comboBoxMarca.FormattingEnabled = true;
-            this.comboBoxMarca.Location = new System.Drawing.Point(106, 201);
+            this.comboBoxMarca.Location = new System.Drawing.Point(109, 201);
             this.comboBoxMarca.Name = "comboBoxMarca";
-            this.comboBoxMarca.Size = new System.Drawing.Size(183, 25);
+            this.comboBoxMarca.Size = new System.Drawing.Size(171, 25);
             this.comboBoxMarca.TabIndex = 4;
             // 
             // btnAceptar
@@ -107,7 +108,7 @@ namespace Vista
             this.btnAceptar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAceptar.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.btnAceptar.ForeColor = System.Drawing.Color.White;
-            this.btnAceptar.Location = new System.Drawing.Point(106, 364);
+            this.btnAceptar.Location = new System.Drawing.Point(108, 364);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(75, 32);
             this.btnAceptar.TabIndex = 8;
@@ -121,7 +122,7 @@ namespace Vista
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelar.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.btnCancelar.ForeColor = System.Drawing.Color.White;
-            this.btnCancelar.Location = new System.Drawing.Point(214, 364);
+            this.btnCancelar.Location = new System.Drawing.Point(205, 364);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 32);
             this.btnCancelar.TabIndex = 9;
@@ -197,9 +198,9 @@ namespace Vista
             this.comboBoxCategoria.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.comboBoxCategoria.ForeColor = System.Drawing.Color.Black;
             this.comboBoxCategoria.FormattingEnabled = true;
-            this.comboBoxCategoria.Location = new System.Drawing.Point(106, 164);
+            this.comboBoxCategoria.Location = new System.Drawing.Point(109, 164);
             this.comboBoxCategoria.Name = "comboBoxCategoria";
-            this.comboBoxCategoria.Size = new System.Drawing.Size(183, 25);
+            this.comboBoxCategoria.Size = new System.Drawing.Size(171, 25);
             this.comboBoxCategoria.TabIndex = 3;
             // 
             // lblCategoria
@@ -216,11 +217,11 @@ namespace Vista
             // 
             // textDescripcion
             // 
-            this.textDescripcion.Location = new System.Drawing.Point(106, 297);
+            this.textDescripcion.Location = new System.Drawing.Point(109, 297);
             this.textDescripcion.MaxLength = 150;
             this.textDescripcion.Multiline = true;
             this.textDescripcion.Name = "textDescripcion";
-            this.textDescripcion.Size = new System.Drawing.Size(183, 63);
+            this.textDescripcion.Size = new System.Drawing.Size(171, 63);
             this.textDescripcion.TabIndex = 7;
             // 
             // lblUrlImage
@@ -238,18 +239,18 @@ namespace Vista
             this.textBoxUrl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxUrl.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.textBoxUrl.ForeColor = System.Drawing.Color.Black;
-            this.textBoxUrl.Location = new System.Drawing.Point(106, 236);
+            this.textBoxUrl.Location = new System.Drawing.Point(109, 236);
             this.textBoxUrl.MaxLength = 1000;
             this.textBoxUrl.Name = "textBoxUrl";
-            this.textBoxUrl.Size = new System.Drawing.Size(183, 25);
+            this.textBoxUrl.Size = new System.Drawing.Size(171, 25);
             this.textBoxUrl.TabIndex = 5;
             // 
             // btnCheckImage
             // 
             this.btnCheckImage.AutoSize = true;
-            this.btnCheckImage.Location = new System.Drawing.Point(158, 263);
+            this.btnCheckImage.Location = new System.Drawing.Point(160, 264);
             this.btnCheckImage.Name = "btnCheckImage";
-            this.btnCheckImage.Size = new System.Drawing.Size(75, 25);
+            this.btnCheckImage.Size = new System.Drawing.Size(71, 25);
             this.btnCheckImage.TabIndex = 6;
             this.btnCheckImage.Text = "Ver Imagen";
             this.btnCheckImage.UseVisualStyleBackColor = true;
@@ -272,17 +273,29 @@ namespace Vista
             this.textBoxId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxId.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.textBoxId.ForeColor = System.Drawing.Color.Black;
-            this.textBoxId.Location = new System.Drawing.Point(106, 9);
+            this.textBoxId.Location = new System.Drawing.Point(109, 9);
             this.textBoxId.MaxLength = 50;
             this.textBoxId.Name = "textBoxId";
             this.textBoxId.ReadOnly = true;
-            this.textBoxId.Size = new System.Drawing.Size(183, 25);
+            this.textBoxId.Size = new System.Drawing.Size(171, 25);
             this.textBoxId.TabIndex = 17;
+            // 
+            // btnAddFile
+            // 
+            this.btnAddFile.AutoSize = true;
+            this.btnAddFile.Location = new System.Drawing.Point(281, 237);
+            this.btnAddFile.Name = "btnAddFile";
+            this.btnAddFile.Size = new System.Drawing.Size(23, 23);
+            this.btnAddFile.TabIndex = 18;
+            this.btnAddFile.Text = "+";
+            this.btnAddFile.UseVisualStyleBackColor = true;
+            this.btnAddFile.Click += new System.EventHandler(this.btnAddFile_Click);
             // 
             // EditForm
             // 
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(306, 403);
+            this.ClientSize = new System.Drawing.Size(310, 403);
+            this.Controls.Add(this.btnAddFile);
             this.Controls.Add(this.textBoxId);
             this.Controls.Add(this.lblId);
             this.Controls.Add(this.btnCheckImage);
@@ -320,6 +333,7 @@ namespace Vista
         private Button btnCheckImage;
         private Label lblId;
         private TextBox textBoxId;
+        private Button btnAddFile;
     }
 
 }
