@@ -8,7 +8,8 @@ namespace Vista
 {
     public partial class EditForm : Form
     {
-        ProductoController controller;
+       private ProductoController controller;
+       private MarcaController marcaController;
 
 
         public EditForm(Articulo art)
@@ -17,6 +18,7 @@ namespace Vista
                 InitializeComponent();
 
                 controller = new ProductoController();
+                marcaController = new MarcaController();
 
 
                 btnAceptar.MouseEnter += new EventHandler(btn_MouseEnter);
@@ -43,7 +45,7 @@ namespace Vista
                 comboBoxCategoria.DisplayMember = "Descripcion"; /// La propiedad que va a mostrar
                 comboBoxCategoria.ValueMember = "Id";   /// la propiedad que va a usar como valor
 
-                comboBoxMarca.DataSource = controller.ListarMarcas();
+                comboBoxMarca.DataSource = marcaController.ListarMarcas();
                 comboBoxMarca.DisplayMember = "Descripcion"; 
                 comboBoxMarca.ValueMember = "Id";
 
@@ -151,6 +153,8 @@ namespace Vista
 
         }
 
+    
+
         private void btnAddFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -158,16 +162,9 @@ namespace Vista
 
             if (openFileDialog.ShowDialog() == DialogResult.OK) {
 
-                string archNombre = openFileDialog.FileName;
-
-              
-
+                textBoxUrl.Text = openFileDialog.FileName;
             }
-            
-            
-            
-          
-
+                    
         }
     }
 

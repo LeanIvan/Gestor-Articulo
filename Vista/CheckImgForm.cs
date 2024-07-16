@@ -27,7 +27,7 @@ namespace Vista
         {
             try
             {
-                pictureBoxCheck.Load(url);
+                pictureBoxCheck.LoadAsync(url);
 
             }catch
             {        

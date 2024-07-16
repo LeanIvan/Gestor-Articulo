@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MarcaController.cs" />
     <Compile Include="ProductoController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

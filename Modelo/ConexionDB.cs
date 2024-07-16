@@ -11,6 +11,7 @@ namespace Modelo
         private SqlConnection sqlConnection;
         private SqlCommand command;
 
+
         public ConexionDB()
         {
             try
@@ -26,6 +27,7 @@ namespace Modelo
                 throw new Exception("Error al inicializar la conexión", ex);
             }
         }
+
 
         public SqlCommand Command
         {
@@ -66,8 +68,7 @@ namespace Modelo
         {
             int rowAfectadas;
             try
-            {
-              
+            {      
                 rowAfectadas = command.ExecuteNonQuery();
             }
             catch (Exception ex)

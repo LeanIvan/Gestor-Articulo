@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 
 
+
+
 namespace Controlador
 {
     public class ProductoController
@@ -15,7 +17,6 @@ namespace Controlador
             db = new ConexionDB();
 
         }
-
 
 
 
@@ -53,36 +54,6 @@ namespace Controlador
 
 
 
-        public Marca getMarcaById(int id)
-        {
-            Marca marca = new Marca();
-
-            try
-            {
-                db.Abrir();
-                db.EjecutarQuery($"SELECT Id, Descripcion FROM MARCAS WHERE Id = {id}");
-                SqlDataReader reader = db.Command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    marca.Id = Convert.ToInt32(reader["Id"]);
-                    marca.Descripcion = reader["Descripcion"].ToString();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al obtener la marca por ID: " + ex.Message, ex);
-            }
-            finally
-            {
-                db.Cerrar();
-            }
-
-            return marca;
-        }
-
-
-
 
 
         public Categoria getCategoriaById(int id)
@@ -116,48 +87,15 @@ namespace Controlador
 
 
 
-
-        public List<Marca> ListarMarcas()
-        {
-            string query = "SELECT Id, Descripcion FROM Marcas";
-
-            List<Marca> marcas = new List<Marca>();
-
-            try
-            {
-                db.Abrir();
-                db.EjecutarQuery(query);
-                SqlDataReader reader = db.Command.ExecuteReader();
-
-
-                while (reader.Read())
-                {
-                    Marca marca = new Marca((int)reader["Id"], (string)reader["Descripcion"]);
-                    marcas.Add(marca);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("error al devolver lista de marcas", ex);
-
-            }
-            finally { db.Cerrar(); }
-            return marcas;
-        }
-
-
-
-
-
         public List<Articulo> ListarArticulos()
         {
             string query = @"
-        SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, A.Precio, A.IdMarca, A.IdCategoria, A.ImagenUrl,
-               M.Descripcion AS MarcaDescripcion,
-               C.Descripcion AS CategoriaDescripcion
-        FROM ARTICULOS A
-        INNER JOIN MARCAS M ON A.IdMarca = M.Id
-        INNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id";
+    SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, A.Precio, A.IdMarca, A.IdCategoria, A.ImagenUrl,
+           M.Descripcion AS MarcaDescripcion,
+           C.Descripcion AS CategoriaDescripcion
+    FROM ARTICULOS A
+    INNER JOIN MARCAS M ON A.IdMarca = M.Id
+    INNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id";
 
             List<Articulo> articulos = new List<Articulo>();
 
@@ -171,26 +109,26 @@ namespace Controlador
                 {
                     Marca marca = new Marca
                     {
-                        Id = (int)reader["IdMarca"],
-                        Descripcion = (string)reader["MarcaDescripcion"]
+                        Id = reader.IsDBNull(reader.GetOrdinal("IdMarca")) ? 0 : (int)reader["IdMarca"],
+                        Descripcion = reader.IsDBNull(reader.GetOrdinal("MarcaDescripcion")) ? string.Empty : (string)reader["MarcaDescripcion"]
                     };
 
                     Categoria categoria = new Categoria
                     {
-                        Id = (int)reader["IdCategoria"],
-                        Descripcion = (string)reader["CategoriaDescripcion"]
+                        Id = reader.IsDBNull(reader.GetOrdinal("IdCategoria")) ? 0 : (int)reader["IdCategoria"],
+                        Descripcion = reader.IsDBNull(reader.GetOrdinal("CategoriaDescripcion")) ? string.Empty : (string)reader["CategoriaDescripcion"]
                     };
 
                     Articulo articulo = new Articulo
                     {
-                        Id = (int)reader["Id"],
-                        Codigo = (string)reader["Codigo"],
-                        Nombre = (string)reader["Nombre"],
-                        Precio = (decimal)reader["Precio"],
+                        Id = reader.IsDBNull(reader.GetOrdinal("Id")) ? 0 : (int)reader["Id"],
+                        Codigo = reader.IsDBNull(reader.GetOrdinal("Codigo")) ? string.Empty : (string)reader["Codigo"],
+                        Nombre = reader.IsDBNull(reader.GetOrdinal("Nombre")) ? string.Empty : (string)reader["Nombre"],
+                        Precio = reader.IsDBNull(reader.GetOrdinal("Precio")) ? 0 : (decimal)reader["Precio"],
                         Marca = marca,
                         Categoria = categoria,
-                        Descripcion = (string)reader["Descripcion"],
-                        UrlImagen = (string)reader["ImagenUrl"]
+                        Descripcion = reader.IsDBNull(reader.GetOrdinal("Descripcion")) ? string.Empty : (string)reader["Descripcion"],
+                        UrlImagen = reader.IsDBNull(reader.GetOrdinal("ImagenUrl")) ? string.Empty : (string)reader["ImagenUrl"]
                     };
 
                     articulos.Add(articulo);
@@ -207,7 +145,6 @@ namespace Controlador
 
             return articulos;
         }
-
 
 
 
@@ -240,7 +177,8 @@ namespace Controlador
 
                 throw new Exception(e.ToString());
 
-            }finally { db.Cerrar(); }
+            }
+            finally { db.Cerrar(); }
             return filasAfectadas;
         }
 
@@ -259,8 +197,8 @@ namespace Controlador
                 db.Abrir();
 
                 db.setQuery(query);
-                db.AgregarParametros("@Id",Id);
-               
+                db.AgregarParametros("@Id", Id);
+
                 filasAfectadas = db.EjecutarAccion();
             }
             catch (Exception e)
@@ -289,7 +227,7 @@ namespace Controlador
 
 
                 db.setQuery(query);
-                db.AgregarParametros("@Id",articulo.Id);
+                db.AgregarParametros("@Id", articulo.Id);
                 db.AgregarParametros("@Precio", articulo.Precio);
                 db.AgregarParametros("@Nombre", articulo.Nombre);
                 db.AgregarParametros("@Descripcion", articulo.Descripcion);
@@ -312,8 +250,6 @@ namespace Controlador
 
             return filasAfectadas;
         }
-
-
 
     }
 }

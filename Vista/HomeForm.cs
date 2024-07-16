@@ -1,5 +1,6 @@
 ﻿using Controlador;
 using Modelo;
+
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -13,6 +14,7 @@ namespace Vista
     {
         // Campos y variables
         private ProductoController controller = new ProductoController();
+        private MarcaController mController = new MarcaController();
         private List<Articulo> articulos;
 
         // Constructor
@@ -44,19 +46,17 @@ namespace Vista
             comboBoxBusqueda.Items.AddRange(new string[] { "Buscar por Código", "Buscar por Nombre" });
             comboBoxBusqueda.SelectedIndex = 0;
 
-            List<Marca> marcas = controller.ListarMarcas();
+            List<Marca> marcas = mController.ListarMarcas();
             comboBoxFiltroMarca.Items.Clear();
             comboBoxFiltroMarca.Items.Add("Todas");
+            
             foreach (Marca marca in marcas)
             {
                 comboBoxFiltroMarca.Items.Add(marca.Descripcion);
             }
             comboBoxFiltroMarca.SelectedIndex = 0;
 
-
-
-
-
+         
             PanelInfo.BackColor = Color.FromArgb(128, 26, 32, 40);
         }
 
@@ -102,7 +102,11 @@ namespace Vista
                 {
                     try
                     {
-                        PictureBoxArticulo.Load((string)fila.Cells["UrlImagen"].Value);
+
+
+                        PictureBoxArticulo.LoadAsync((string)fila.Cells["UrlImagen"].Value);
+                        //  PictureBoxArticulo.Load((string)fila.Cells["UrlImagen"].Value);
+
                     }
                     catch
                     {
@@ -274,6 +278,7 @@ namespace Vista
                 }
             }
 
+
             // segundo filtro
 
             if (marcaSeleccionada != "Todas")
@@ -298,10 +303,14 @@ namespace Vista
 
         private void menuStripNuevoMarca_Click(object sender, EventArgs e)
         {
+            using (NewMarcaForm frm = new NewMarcaForm())
+            {
+                frm.ShowDialog();
+            }
 
-            // Evento para el clic en el menú "Nueva Marca"
-            MessageBox.Show("Clickeaste en Nueva Marca");
+
         }
+                
 
 
 

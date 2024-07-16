@@ -4,12 +4,15 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using System.IO;
+using System.Configuration;
 
 namespace Vista
 {
     public partial class AddForm : Form
     {
-        public ProductoController controller;
+        private MarcaController marcaController;
+        private ProductoController controller;
         private System.Windows.Forms.Timer timer;
 
 
@@ -23,6 +26,7 @@ namespace Vista
             timer.Tick += Timer_Tikitoc;
 
             controller = new ProductoController();
+            marcaController = new MarcaController();
 
 
             btnAceptar.MouseEnter += new EventHandler(btn_MouseEnter);
@@ -31,14 +35,14 @@ namespace Vista
             btnCancelar.MouseLeave += new EventHandler(btn_MouseLeave);
             btnAceptar.Click += new EventHandler(btnAceptar_Click);
             btnCancelar.Click += new EventHandler(btnCancelar_Click);
-            
+
 
         }
 
 
         private void AddForm_Load(object sender, EventArgs e)
         {
-            List<Marca> listaMarcas = controller.ListarMarcas();
+            List<Marca> listaMarcas = marcaController.ListarMarcas();
             List<Categoria> listaCategorias = controller.ListarCategorias();
 
             /// comboBoxes
@@ -81,8 +85,8 @@ namespace Vista
                 string nombre = txtNombre.Text;
                 string descripcion = txtBoxDescripcion.Text;
                 string urlImagen = textBoxUrlImage.Text;
-                Marca marca = (Marca)comboBoxMarca.SelectedItem; 
-                Categoria categoria = (Categoria)comboBoxCategoria.SelectedItem; 
+                Marca marca = (Marca)comboBoxMarca.SelectedItem;
+                Categoria categoria = (Categoria)comboBoxCategoria.SelectedItem;
 
                 if (!decimal.TryParse(txtPrecio.Text, out decimal precio) || precio <= 0)
                 {
@@ -90,19 +94,20 @@ namespace Vista
                     return;
                 }
 
-                
-                if (!ValidarDatos(out string mensajeError))
+
+                if (!DatosValidos(out string mensajeError))
                 {
-                   
+
                     ReproducirSonidoError();
                     MessageBox.Show(mensajeError);
                     timer.Start();
-                    this.DialogResult = DialogResult.None; 
+                    this.DialogResult = DialogResult.None;
                     return;
                 }
 
-               
+
                 Articulo nuevoArticulo = new Articulo(codigo, nombre, precio, marca, categoria, descripcion, urlImagen);
+                
                 int rowsAfectadas = controller.InsertarArticulo(nuevoArticulo);
 
                 if (rowsAfectadas > 0)
@@ -173,7 +178,7 @@ namespace Vista
             }
 
 
-            // Detener el Timer después de dos parpadeos
+            // parar el Timer después de dos parpadeos
             if (contadorParpadeo >= 4)
             {
                 timer.Stop();
@@ -194,7 +199,7 @@ namespace Vista
         }
 
 
-        private bool ValidarDatos(out string mensajeError)
+        private bool DatosValidos(out string mensajeError)
         {
             bool valido = true;
             mensajeError = string.Empty;
@@ -235,7 +240,7 @@ namespace Vista
         private void btnCheckImage_Click(object sender, EventArgs e)
         {
 
-          CheckImgForm formImg = new CheckImgForm(this.textBoxUrlImage.Text);
+            CheckImgForm formImg = new CheckImgForm(this.textBoxUrlImage.Text);
 
             formImg.ShowDialog();
 
@@ -243,11 +248,15 @@ namespace Vista
 
         private void btnAddFile_Click(object sender, EventArgs e)
         {
+            OpenFileDialog arch = new OpenFileDialog();
 
-            OpenFileDialog ofd = new OpenFileDialog();
+            arch.Filter = "Image Files|*.jpg;*.jpeg;*.png";
 
-
-
+           
+            if (arch.ShowDialog() == DialogResult.OK)
+            {
+                textBoxUrlImage.Text = arch.FileName;
+            }
 
         }
     }
