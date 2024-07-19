@@ -1,9 +1,9 @@
 ﻿using Controlador;
 using Modelo;
-
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -12,12 +12,13 @@ namespace Vista
 
     public partial class HomeForm : Form
     {
-        // Campos y variables
+      
         private ProductoController controller = new ProductoController();
         private MarcaController mController = new MarcaController();
         private List<Articulo> articulos;
 
-        // Constructor
+
+       
         public HomeForm()
         {
             InitializeComponent();
@@ -27,12 +28,10 @@ namespace Vista
 
 
 
-        // Métodos privados
-
-
         private void InicializarControles()
         {
-            // Configuración inicial de controles visuales
+
+          
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
 
@@ -55,9 +54,9 @@ namespace Vista
                 comboBoxFiltroMarca.Items.Add(marca.Descripcion);
             }
             comboBoxFiltroMarca.SelectedIndex = 0;
-
          
             PanelInfo.BackColor = Color.FromArgb(128, 26, 32, 40);
+
         }
 
 
@@ -65,7 +64,7 @@ namespace Vista
 
         private void InicializarEventos()
         {
-            // Suscripción de eventos
+         
             btnEditar.Click += editar_Producto_btn;
             articuloToolStripMenuItem.Click += BtnNuevoProducto_Click;
             categoriaToolStripMenuItem.Click += menuStripNuevoCategoria_Click;
@@ -78,7 +77,7 @@ namespace Vista
 
         private void Homeform_Load(object sender, EventArgs e)
         {
-            // Carga inicial de datos en el DataGridView
+      
             articulos = controller.ListarArticulos();
             dgvList.DataSource = articulos;
             dgvList.ReadOnly = true;
@@ -101,16 +100,16 @@ namespace Vista
                 if (fila != null)
                 {
                     try
-                    {
-
+                    {              
 
                         PictureBoxArticulo.LoadAsync((string)fila.Cells["UrlImagen"].Value);
+                        
                         //  PictureBoxArticulo.Load((string)fila.Cells["UrlImagen"].Value);
-
                     }
                     catch
                     {
                         PictureBoxArticulo.Image = PictureBoxArticulo.ErrorImage;
+                        
                     }
 
                     string codigoArt = fila.Cells["Codigo"].Value.ToString();
@@ -247,7 +246,7 @@ namespace Vista
 
         private void BtnBuscar_Click(object sender, EventArgs e)
         {
-            // Realiza una búsqueda filtrada de artículos
+         
             ActualizarDatos();
             BusquedaFiltrada();
         }
@@ -295,8 +294,17 @@ namespace Vista
 
         private void menuStripNuevoCategoria_Click(object sender, EventArgs e)
         {
-            // Evento para el clic en el menú "Nueva Categoría"
-            MessageBox.Show("Clickeaste en Nueva Categoría");
+        
+            using(NewCategoryForm frm = new NewCategoryForm())
+            {
+                    if( frm.ShowDialog() == DialogResult.OK)
+                {
+                    MessageBox.Show("Categoria agregada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ActualizarDatos();
+                }
+
+            }
+
         }
 
 
@@ -305,9 +313,12 @@ namespace Vista
         {
             using (NewMarcaForm frm = new NewMarcaForm())
             {
-                frm.ShowDialog();
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    MessageBox.Show("Marca agregada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ActualizarDatos();
+                }
             }
-
 
         }
                 
@@ -338,11 +349,18 @@ namespace Vista
 
 
 
-        // Método para actualizar los datos en el DataGridView
+        //  actualizar los datos en el dgv
         public void ActualizarDatos()
         {
             articulos = controller.ListarArticulos();
+            
             dgvList.DataSource = articulos;
+           
+            comboBoxFiltroMarca.DataSource = mController.ListarMarcas();
+
+
+            dgvList.Refresh();
+            comboBoxFiltroMarca.Refresh();
         }
     }
 }

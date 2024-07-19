@@ -9,10 +9,13 @@ using System.Configuration;
 
 namespace Vista
 {
+
     public partial class AddForm : Form
     {
+
         private MarcaController marcaController;
         private ProductoController controller;
+        private CategoriaController categoriaController;
         private System.Windows.Forms.Timer timer;
 
 
@@ -27,6 +30,7 @@ namespace Vista
 
             controller = new ProductoController();
             marcaController = new MarcaController();
+            categoriaController = new CategoriaController();
 
 
             btnAceptar.MouseEnter += new EventHandler(btn_MouseEnter);
@@ -36,14 +40,13 @@ namespace Vista
             btnAceptar.Click += new EventHandler(btnAceptar_Click);
             btnCancelar.Click += new EventHandler(btnCancelar_Click);
 
-
         }
 
 
         private void AddForm_Load(object sender, EventArgs e)
         {
             List<Marca> listaMarcas = marcaController.ListarMarcas();
-            List<Categoria> listaCategorias = controller.ListarCategorias();
+            List<Categoria> listaCategorias = categoriaController.ListarCategorias();
 
             /// comboBoxes
             comboBoxMarca.DisplayMember = "Descripcion";
@@ -57,7 +60,6 @@ namespace Vista
             comboBoxCategoria.DataSource = listaCategorias;
 
 
-
             if (comboBoxMarca.Items.Count > 0)
             {
                 comboBoxMarca.SelectedIndex = 0;
@@ -67,7 +69,6 @@ namespace Vista
             {
                 comboBoxCategoria.SelectedIndex = 0;
             }
-
 
             /// TextBoxes
             /// 
@@ -79,6 +80,7 @@ namespace Vista
 
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
+
             try
             {
                 string codigo = txtBoxCodigo.Text;
@@ -125,7 +127,6 @@ namespace Vista
                 MessageBox.Show("Error al agregar Producto: " + ex.Message);
             }
         }
-
 
 
 

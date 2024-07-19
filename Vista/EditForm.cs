@@ -10,6 +10,7 @@ namespace Vista
     {
        private ProductoController controller;
        private MarcaController marcaController;
+        private CategoriaController categoriaController;
 
 
         public EditForm(Articulo art)
@@ -19,6 +20,7 @@ namespace Vista
 
                 controller = new ProductoController();
                 marcaController = new MarcaController();
+                categoriaController = new CategoriaController();
 
 
                 btnAceptar.MouseEnter += new EventHandler(btn_MouseEnter);
@@ -41,7 +43,7 @@ namespace Vista
                 /// comboBoxs
                 /// 
 
-                comboBoxCategoria.DataSource = controller.ListarCategorias();
+                comboBoxCategoria.DataSource = categoriaController.ListarCategorias();
                 comboBoxCategoria.DisplayMember = "Descripcion"; /// La propiedad que va a mostrar
                 comboBoxCategoria.ValueMember = "Id";   /// la propiedad que va a usar como valor
 

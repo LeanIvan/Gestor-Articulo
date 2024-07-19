@@ -31,19 +31,17 @@ namespace Vista
            
             try
             {
-
                 string marca = (string)txtBoxMarca.Text;
 
-                if (String.IsNullOrWhiteSpace(marca) || MarcaController.ExisteMarca(marca))
+                if (String.IsNullOrWhiteSpace(marca) || MarcaController.ExisteMarca(marca) || ContieneNumeros(marca))
                 {
-                    MessageBox.Show("El campo de la marca no puede estar vacío o contener solo espacios en blanco.", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("El campo de la marca no puede estar vacío o contener solo espacios en blanco o numeros.", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                MessageBox.Show("no existe la marca");
-
-                //  MessageBox.Show("Marca agregada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+              MarcaController.InsertarMarca(marca);
+                DialogResult = DialogResult.OK;
+                this.Close();
 
             }
             catch (Exception ex)
@@ -52,5 +50,16 @@ namespace Vista
             }
 
         }
+
+
+        private bool ContieneNumeros(string cad)
+        {
+            return System.Text.RegularExpressions.Regex.IsMatch(cad, @"\d");
+        }
+
+
+
+
+
     }
 }

@@ -10,81 +10,13 @@ namespace Controlador
 {
     public class ProductoController
     {
-        public ConexionDB db;
+        private ConexionDB db;
 
         public ProductoController()
         {
             db = new ConexionDB();
 
         }
-
-
-
-        public List<Categoria> ListarCategorias()
-        {
-            List<Categoria> listaCategoria = new List<Categoria>();
-
-            string query = "select Id , Descripcion from CATEGORIAS";
-
-            try
-            {
-                db.Abrir();
-                db.EjecutarQuery(query);
-                SqlDataReader reader = db.Command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    Categoria cat = new Categoria((int)reader["Id"], reader["Descripcion"] as string);
-
-                    listaCategoria.Add(cat);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"{ex.Message}", ex);
-            }
-            finally
-            {
-                db.Cerrar();
-            }
-
-            return listaCategoria;
-        }
-
-
-
-
-
-
-        public Categoria getCategoriaById(int id)
-        {
-            Categoria cat = new Categoria();
-
-            try
-            {
-                db.Abrir();
-                db.EjecutarQuery($"SELECT Id, Descripcion FROM CATEGORIAS WHERE Id = {id}");
-                SqlDataReader reader = db.Command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    cat.Id = Convert.ToInt32(reader["Id"]);
-                    cat.Descripcion = reader["Descripcion"].ToString();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al obtener la categoría por ID: " + ex.Message, ex);
-            }
-            finally
-            {
-                db.Cerrar();
-            }
-
-            return cat;
-        }
-
-
 
 
         public List<Articulo> ListarArticulos()
@@ -109,6 +41,7 @@ namespace Controlador
                 {
                     Marca marca = new Marca
                     {
+
                         Id = reader.IsDBNull(reader.GetOrdinal("IdMarca")) ? 0 : (int)reader["IdMarca"],
                         Descripcion = reader.IsDBNull(reader.GetOrdinal("MarcaDescripcion")) ? string.Empty : (string)reader["MarcaDescripcion"]
                     };

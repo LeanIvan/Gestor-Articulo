@@ -39,28 +39,28 @@
             this.btnAgregar.Location = new System.Drawing.Point(9, 107);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
-            this.btnAgregar.TabIndex = 0;
+            this.btnAgregar.TabIndex = 1;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(90, 107);
+            this.btnCancelar.Location = new System.Drawing.Point(89, 107);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 1;
+            this.btnCancelar.TabIndex = 2;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // txtBoxMarca
             // 
-            this.txtBoxMarca.Location = new System.Drawing.Point(9, 65);
+            this.txtBoxMarca.Location = new System.Drawing.Point(9, 67);
             this.txtBoxMarca.MaxLength = 100;
             this.txtBoxMarca.Name = "txtBoxMarca";
-            this.txtBoxMarca.Size = new System.Drawing.Size(156, 20);
-            this.txtBoxMarca.TabIndex = 2;
+            this.txtBoxMarca.Size = new System.Drawing.Size(155, 20);
+            this.txtBoxMarca.TabIndex = 0;
             // 
             // lblMarca
             // 
@@ -75,15 +75,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(177, 146);
+            this.ClientSize = new System.Drawing.Size(169, 146);
             this.Controls.Add(this.lblMarca);
             this.Controls.Add(this.txtBoxMarca);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAgregar);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.Name = "NewMarcaForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "NewMarcaForm";
+            this.Text = "Nueva Marca";
             this.ResumeLayout(false);
             this.PerformLayout();
 
