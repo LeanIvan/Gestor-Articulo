@@ -16,3 +16,12 @@ C:\Users\ivana\Desktop\InventarioConMVC\GestorInventario\Controlador\obj\Debug\C
 C:\Users\ivana\Desktop\InventarioConMVC\GestorInventario\Controlador\obj\Debug\Controlador.csproj.CopyComplete
 C:\Users\ivana\Desktop\InventarioConMVC\GestorInventario\Controlador\obj\Debug\Controlador.dll
 C:\Users\ivana\Desktop\InventarioConMVC\GestorInventario\Controlador\obj\Debug\Controlador.pdb
+C:\Users\ivana\Desktop\InventarioConMVC\Gestor-Articulo\Controlador\bin\Debug\Controlador.dll
+C:\Users\ivana\Desktop\InventarioConMVC\Gestor-Articulo\Controlador\bin\Debug\Controlador.pdb
+C:\Users\ivana\Desktop\InventarioConMVC\Gestor-Articulo\Controlador\bin\Debug\Modelo.dll
+C:\Users\ivana\Desktop\InventarioConMVC\Gestor-Articulo\Controlador\bin\Debug\Modelo.pdb
+C:\Users\ivana\Desktop\InventarioConMVC\Gestor-Articulo\Controlador\obj\Debug\Controlador.csproj.AssemblyReference.cache
+C:\Users\ivana\Desktop\InventarioConMVC\Gestor-Articulo\Controlador\obj\Debug\Controlador.csproj.CoreCompileInputs.cache
+C:\Users\ivana\Desktop\InventarioConMVC\Gestor-Articulo\Controlador\obj\Debug\Controlador.csproj.CopyComplete
+C:\Users\ivana\Desktop\InventarioConMVC\Gestor-Articulo\Controlador\obj\Debug\Controlador.dll
+C:\Users\ivana\Desktop\InventarioConMVC\Gestor-Articulo\Controlador\obj\Debug\Controlador.pdb

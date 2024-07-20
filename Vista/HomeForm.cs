@@ -16,6 +16,7 @@ namespace Vista
         private ProductoController controller = new ProductoController();
         private MarcaController mController = new MarcaController();
         private List<Articulo> articulos;
+        private List<Marca> marcas;
 
 
        
@@ -31,7 +32,6 @@ namespace Vista
         private void InicializarControles()
         {
 
-          
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
 
@@ -45,15 +45,7 @@ namespace Vista
             comboBoxBusqueda.Items.AddRange(new string[] { "Buscar por Código", "Buscar por Nombre" });
             comboBoxBusqueda.SelectedIndex = 0;
 
-            List<Marca> marcas = mController.ListarMarcas();
-            comboBoxFiltroMarca.Items.Clear();
-            comboBoxFiltroMarca.Items.Add("Todas");
-            
-            foreach (Marca marca in marcas)
-            {
-                comboBoxFiltroMarca.Items.Add(marca.Descripcion);
-            }
-            comboBoxFiltroMarca.SelectedIndex = 0;
+            ActualizarComboBoxMarca();
          
             PanelInfo.BackColor = Color.FromArgb(128, 26, 32, 40);
 
@@ -244,10 +236,28 @@ namespace Vista
 
 
 
+        private void ActualizarComboBoxMarca()
+        {
+            comboBoxFiltroMarca.Items.Clear();
+            this.marcas = mController.ListarMarcas();       
+            comboBoxFiltroMarca.Items.Add("Todas");
+
+            foreach (Marca marca in marcas)
+            {
+                comboBoxFiltroMarca.Items.Add(marca.Descripcion);
+            }
+            comboBoxFiltroMarca.Refresh();
+            comboBoxFiltroMarca.SelectedIndex = 0;
+
+        }
+
+
+
         private void BtnBuscar_Click(object sender, EventArgs e)
         {
-         
+            // aca se va el despliegue antes de mostrar lo filtrado . quitar si molesta
             ActualizarDatos();
+
             BusquedaFiltrada();
         }
 
@@ -300,6 +310,7 @@ namespace Vista
                     if( frm.ShowDialog() == DialogResult.OK)
                 {
                     MessageBox.Show("Categoria agregada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    
                     ActualizarDatos();
                 }
 
@@ -316,6 +327,8 @@ namespace Vista
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
                     MessageBox.Show("Marca agregada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    
+                    ActualizarComboBoxMarca();
                     ActualizarDatos();
                 }
             }
@@ -355,9 +368,7 @@ namespace Vista
             articulos = controller.ListarArticulos();
             
             dgvList.DataSource = articulos;
-           
-            comboBoxFiltroMarca.DataSource = mController.ListarMarcas();
-
+        
 
             dgvList.Refresh();
             comboBoxFiltroMarca.Refresh();

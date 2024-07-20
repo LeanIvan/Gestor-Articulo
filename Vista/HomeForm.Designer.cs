@@ -54,7 +54,6 @@ namespace Vista
             this.articuloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.marcaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.categoriaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.opcionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comboBoxFiltroMarca = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.PanelInfo.SuspendLayout();
@@ -296,8 +295,7 @@ namespace Vista
             this.menuStripBar.AutoSize = false;
             this.menuStripBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(163)))), ((int)(((byte)(0)))));
             this.menuStripBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.nuevoToolStripMenuItem,
-            this.opcionesToolStripMenuItem});
+            this.nuevoToolStripMenuItem});
             this.menuStripBar.Location = new System.Drawing.Point(0, 0);
             this.menuStripBar.Name = "menuStripBar";
             this.menuStripBar.Size = new System.Drawing.Size(1054, 27);
@@ -317,26 +315,20 @@ namespace Vista
             // articuloToolStripMenuItem
             // 
             this.articuloToolStripMenuItem.Name = "articuloToolStripMenuItem";
-            this.articuloToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.articuloToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.articuloToolStripMenuItem.Text = "Articulo";
             // 
             // marcaToolStripMenuItem
             // 
             this.marcaToolStripMenuItem.Name = "marcaToolStripMenuItem";
-            this.marcaToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.marcaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.marcaToolStripMenuItem.Text = "Marca";
             // 
             // categoriaToolStripMenuItem
             // 
             this.categoriaToolStripMenuItem.Name = "categoriaToolStripMenuItem";
-            this.categoriaToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.categoriaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.categoriaToolStripMenuItem.Text = "Categoria";
-            // 
-            // opcionesToolStripMenuItem
-            // 
-            this.opcionesToolStripMenuItem.Name = "opcionesToolStripMenuItem";
-            this.opcionesToolStripMenuItem.Size = new System.Drawing.Size(69, 23);
-            this.opcionesToolStripMenuItem.Text = "Opciones";
             // 
             // comboBoxFiltroMarca
             // 
@@ -405,7 +397,6 @@ namespace Vista
         private ToolStripMenuItem articuloToolStripMenuItem;
         private ToolStripMenuItem marcaToolStripMenuItem;
         private ToolStripMenuItem categoriaToolStripMenuItem;
-        private ToolStripMenuItem opcionesToolStripMenuItem;
         private ComboBox comboBoxFiltroMarca;
     }
 }
